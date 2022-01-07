@@ -14,7 +14,7 @@ public abstract class Payment {
     private Order order;
     
     public Order calculateTotalPrice(){
-        return ;
+        return this.order;
     }
     public abstract void info();
 }

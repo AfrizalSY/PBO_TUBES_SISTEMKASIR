@@ -22,6 +22,8 @@ public class Cashier implements CashierInterface{
         this.name = name;
         this.username = user;
         this.password = pass;
+        this.listOrder = new ArrayList<>();
+        this.listPayment = new ArrayList<>();        
     }
 
     public String getName() {
@@ -51,8 +53,8 @@ public class Cashier implements CashierInterface{
     public void getItem(Item n){
         
     }
-    public void createOrder(){
-        
+    public Order createOrder(int tableNo){
+        return new Order(tableNo);        
     }
     @Override
     public void addItem(Item n) {
@@ -60,8 +62,8 @@ public class Cashier implements CashierInterface{
     }
 
     @Override
-    public void addItem(Item n, Order o) {
-        
+    public void addItem(Item n,int qty, Order o) {
+        o.addOrderItem(n, qty);
     }
 
     @Override

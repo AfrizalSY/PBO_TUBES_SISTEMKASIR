@@ -12,11 +12,22 @@ import java.util.ArrayList;
  * @author WIBU
  */
 public class Order {
+
     private int orderID;
     private int tableNumber;
     private ArrayList<OrderItem> listItem;
     private float totalPrice;
 
+    public Order(int tableNumber) {
+        this.tableNumber = tableNumber;
+        this.listItem = new ArrayList<>();
+    }
+    
+    public void addOrderItem(Item item, int qty){
+        OrderItem i = new OrderItem(qty, item);
+        this.listItem.add(i);
+    }
+    
     public int getOrderID() {
         return orderID;
     }
@@ -42,17 +53,21 @@ public class Order {
     }
 
     public float getTotalPrice() {
-        return totalPrice;
+        float total = 0f;
+        for (OrderItem orderItem : listItem) {
+            total += orderItem.getTotalPrice();
+        }
+        return total;
     }
 
 //    public void setTotalPrice(float totalPrice) {
 //        this.totalPrice = totalPrice;
 //    }
-    
-    public OrderItem calculateTotalPrice(){
-//        for(OrderItem n :)
+    public float calculateTotalPrice() {
+        return  0f;
     }
-    public void getTotalItem(){
-        
+
+    public void getTotalItem() {
+
     }
 }

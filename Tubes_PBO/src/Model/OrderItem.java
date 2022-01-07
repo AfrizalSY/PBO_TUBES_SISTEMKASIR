@@ -5,7 +5,6 @@
  */
 package Model;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -13,8 +12,14 @@ import java.util.ArrayList;
  */
 public class OrderItem {
     private int quantity;
-    private ArrayList<Item> listItem;
+    private Item item;
 
+    public OrderItem(int quantity, Item item) {
+        this.quantity = quantity;
+        this.item = item;
+    }
+
+    
     public int getQuantity() {
         return quantity;
     }
@@ -23,12 +28,16 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public ArrayList<Item> getListItem() {
-        return listItem;
+    public Item getItem() {
+        return item;
     }
 
-    public void setListItem(ArrayList<Item> listItem) {
-        this.listItem = listItem;
+    public void setItem(Item item) {
+        this.item = item;
+    }   
+    
+    public float getTotalPrice(){
+        return this.item.getPrice() * quantity;
     }
 
 }
