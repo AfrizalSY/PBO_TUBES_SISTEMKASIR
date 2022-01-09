@@ -40,7 +40,13 @@ public class LoginController extends MouseAdapter implements ActionListener,Base
         if(username.isEmpty()|| pass.isEmpty()){
             msg.showMessage("Username atau Password Kosong","Validasi Eror", 2);
         }else{
-            
+            if (username.equalsIgnoreCase("test") && pass.equalsIgnoreCase("12345")) {
+                msg.showMessage("Login Successful", "Login", 2);
+                new OptionController();
+                frame.dispose();
+            } else {
+                msg.showMessage("Invalid Username or Password", "Validasi Error", 2);
+            }
         }
     }
 }

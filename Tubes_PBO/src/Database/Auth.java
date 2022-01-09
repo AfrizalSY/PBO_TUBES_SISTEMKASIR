@@ -23,4 +23,5 @@ public class Auth extends Database {
         disconnect();
         return cek;
     }
+    public Cashier Login
 }
