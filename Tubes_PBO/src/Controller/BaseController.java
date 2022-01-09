@@ -5,11 +5,12 @@
  */
 package Controller;
 import Helper.Message;
-
+import Model.Cashier;
 /**
  *
  * @author WIBU
  */
 public interface BaseController {
     Message msg = new Message();
+    Cashier cashier = new Cashier();
 }

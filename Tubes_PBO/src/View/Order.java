@@ -22,6 +22,7 @@ public class Order extends javax.swing.JFrame {
      */
     public Order() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     public JTable getTableItem(){
         return tblItem;
@@ -353,8 +354,7 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahOrderActionPerformed
 
     private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
-        new Option().setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_btnkembaliActionPerformed
 
     private void tabelkeranjangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelkeranjangMouseClicked

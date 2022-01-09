@@ -23,6 +23,7 @@ public class Bayar extends javax.swing.JFrame {
      */
     public Bayar() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     public JButton getBtnKembali(){
         return btnKembali;

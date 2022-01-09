@@ -21,6 +21,7 @@ public class Item extends javax.swing.JFrame {
      */
     public Item() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     public JTable getTableProduk(){
         return tabelproduk;
@@ -275,8 +276,7 @@ public class Item extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelprodukMouseClicked
 
     private void btnkembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnkembaliActionPerformed
-        new Option().setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_btnkembaliActionPerformed
 
     private void txtJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJenisActionPerformed

@@ -19,6 +19,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public String getUsername() {
@@ -26,7 +27,12 @@ public class Login extends javax.swing.JFrame {
     }
 
     public String getPassword() {
-        return String.valueOf(passField.getPassword());
+        return passField.getText();
+    }
+
+    public void resetForm() {
+        this.txtFieldUsername.setText("");
+        this.passField.setText("");
     }
 
     public JButton btnlogin() {

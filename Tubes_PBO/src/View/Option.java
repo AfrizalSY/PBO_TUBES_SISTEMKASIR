@@ -19,6 +19,7 @@ public class Option extends javax.swing.JFrame {
      */
     public Option() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public JButton getbtnLogout() {

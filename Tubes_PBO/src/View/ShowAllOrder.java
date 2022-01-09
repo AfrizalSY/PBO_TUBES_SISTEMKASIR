@@ -16,6 +16,7 @@ public class ShowAllOrder extends javax.swing.JFrame {
      */
     public ShowAllOrder() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

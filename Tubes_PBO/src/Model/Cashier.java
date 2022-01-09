@@ -25,6 +25,13 @@ public class Cashier implements CashierInterface{
         this.listOrder = new ArrayList<>();
         this.listPayment = new ArrayList<>();        
     }
+    public Cashier(String user, String pass){
+        this.username = user;
+        this.password = pass;
+    }
+    public Cashier(){
+        
+    }
 
     public String getName() {
         return name;

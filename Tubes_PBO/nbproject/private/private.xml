@@ -9,7 +9,7 @@
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/View/Option.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/View/Order.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Controller/ItemController.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Database/Auth.java</file>
+            <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Main/Main.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Controller/BayarController.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Helper/Message.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Model/Cash.java</file>
@@ -27,10 +27,10 @@
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/View/ShowAllOrder.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Controller/CashierController.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Model/Cashier.java</file>
-            <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Main.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Model/Payment.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Model/Item.java</file>
             <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Model/Tax.java</file>
+            <file>file:/C:/Users/ASUS/OneDrive/Desktop/Documents/Kuliah/SEMESTER_5/PBO/TubesPBO/Tubes_PBO/src/Controller/ShowAllOrderController.java</file>
         </group>
     </open-files>
 </project-private>
