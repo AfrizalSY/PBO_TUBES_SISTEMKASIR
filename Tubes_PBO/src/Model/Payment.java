@@ -10,11 +10,16 @@ package Model;
  * @author WIBU
  */
 public abstract class Payment {
-    private float amount;
+    private double amount;
     private Order order;
-    
-    public Order calculateTotalPrice(){
-        return this.order;
+
+    public Payment(float amount, Order order) {
+        this.amount = amount;
+        this.order = order;
+    }
+    public double calculateTotalPrice(){
+        this.amount = this.order.getTotalPrice();
+        return this.amount;
     }
     public abstract void info();
 }

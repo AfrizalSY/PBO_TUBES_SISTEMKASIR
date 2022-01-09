@@ -9,7 +9,7 @@ import Model.*;
 
 /**
  *
- * @author krobus
+ * @author WIBU
  */
 public class CashierController {
 
@@ -27,7 +27,10 @@ public class CashierController {
         this.cashier.addItem(item, qty, order);
     }
 
-    public float calculateOrderPrice(Order order) {
+    public double calculateOrderPrice(Order order) {
         return order.getTotalPrice();
+    }
+    public void getTotalItem(Order order){
+        order.getTotalItem();
     }
 }

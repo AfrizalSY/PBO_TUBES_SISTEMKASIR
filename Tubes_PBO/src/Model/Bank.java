@@ -14,6 +14,11 @@ public class Bank extends Payment implements Tax{
     private String bankName;
     private String bankID;
 
+    public Bank(String bankName, String bankID, float amount, Order order) {
+        super(amount, order);
+        this.bankName = bankName;
+        this.bankID = bankID;
+    }
     public String getBankName() {
         return bankName;
     }
@@ -32,7 +37,9 @@ public class Bank extends Payment implements Tax{
     
     @Override
     public double includeTax(){
-        return 0;
+        double total = 0;
+        total = calculateTotalPrice()+(calculateTotalPrice() * (10/100));
+        return total;
     }
     @Override
     public void info(){

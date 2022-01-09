@@ -16,14 +16,14 @@ public class Order {
     private int orderID;
     private int tableNumber;
     private ArrayList<OrderItem> listItem;
-    private float totalPrice;
+    private double totalPrice;
 
     public Order(int tableNumber) {
         this.tableNumber = tableNumber;
         this.listItem = new ArrayList<>();
     }
-    
-    public void addOrderItem(Item item, int qty){
+
+    public void addOrderItem(Item item, int qty) {
         OrderItem i = new OrderItem(qty, item);
         this.listItem.add(i);
     }
@@ -52,22 +52,20 @@ public class Order {
         this.listItem = listItem;
     }
 
-    public float getTotalPrice() {
-        float total = 0f;
+    public double getTotalPrice() {
+        double total = 0f;
         for (OrderItem orderItem : listItem) {
             total += orderItem.getTotalPrice();
         }
         return total;
     }
 
-//    public void setTotalPrice(float totalPrice) {
-//        this.totalPrice = totalPrice;
-//    }
-    public float calculateTotalPrice() {
-        return  0f;
-    }
-
     public void getTotalItem() {
-
+        int total = 0;
+        for (OrderItem orderItem : listItem) {
+            System.out.println("Item: "+ orderItem.getItem().getName()+" \tQuantity:"+ orderItem.getQuantity());
+            total += orderItem.getQuantity();
+        }
+        System.out.println("Total Item: "+total);
     }
 }

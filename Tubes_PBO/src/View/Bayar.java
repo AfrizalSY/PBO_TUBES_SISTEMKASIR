@@ -5,6 +5,13 @@
  */
 package View;
 
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
 /**
  *
  * @author WIBU
@@ -17,7 +24,34 @@ public class Bayar extends javax.swing.JFrame {
     public Bayar() {
         initComponents();
     }
-
+    public JButton getBtnKembali(){
+        return btnKembali;
+    }
+    public JButton getBtnBayar(){
+        return btnBayar;
+    }
+    public JLabel getKembalian(){
+        return txtKembalian;
+    }
+    public JLabel getTotal(){
+        return txtTotal;
+    }
+    public JComboBox getCmbNamaBank(){
+        return cmbBoxNamaBank;
+    }
+    public JTextField getTxtFieldBayar(){
+        return textFieldBayar;
+    }
+    public JRadioButton getMthdCash(){
+        return cbCash;
+    }
+    public JRadioButton getMthdBank(){
+        return cbBank;
+    }
+    public void addActionListener(ActionListener e) {
+        btnBayar.addActionListener(e);
+        btnKembali.addActionListener(e);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,6 +74,8 @@ public class Bayar extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         textFieldBayar = new javax.swing.JTextField();
         btnBayar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtKembalian = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +119,10 @@ public class Bayar extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Kembalian");
+
+        txtKembalian.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,7 +154,11 @@ public class Bayar extends javax.swing.JFrame {
                                         .addGap(9, 9, 9)
                                         .addComponent(txtTotal))
                                     .addComponent(textFieldBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(47, 47, 47)
+                                .addComponent(txtKembalian)))))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,7 +187,11 @@ public class Bayar extends javax.swing.JFrame {
                     .addComponent(textFieldBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnBayar)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtKembalian))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,10 +253,12 @@ public class Bayar extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbBoxNamaBank;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField textFieldBayar;
+    private javax.swing.JLabel txtKembalian;
     private javax.swing.JLabel txtTotal;
     // End of variables declaration//GEN-END:variables
 }

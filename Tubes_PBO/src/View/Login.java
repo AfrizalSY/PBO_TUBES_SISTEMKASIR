@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+
 /**
  *
  * @author WIBU
@@ -16,6 +19,22 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+    }
+
+    public String getUsername() {
+        return txtFieldUsername.getText();
+    }
+
+    public String getPassword() {
+        return String.valueOf(passField.getPassword());
+    }
+
+    public JButton btnlogin() {
+        return btnLogin;
+    }
+
+    public void addActionListener(ActionListener e) {
+        btnLogin.addActionListener(e);
     }
 
     /**

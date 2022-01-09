@@ -10,19 +10,26 @@ package Model;
  * @author WIBU
  */
 public class Cash extends Payment implements Tax{
-    private float cash;
+    private double cash;
 
-    public float getCash() {
+    public Cash(double cash, float amount, Order order) {
+        super(amount, order);
+        this.cash = cash;
+    }
+    
+    public double getCash() {
         return cash;
     }
 
-    public void setCash(float cash) {
+    public void setCash(double cash) {
         this.cash = cash;
     }
     
     @Override
     public double includeTax(){
-        return 0;
+        double total = 0;
+        total = calculateTotalPrice()+(calculateTotalPrice() * (10/100));
+        return total;
     }
     @Override
     public void info(){

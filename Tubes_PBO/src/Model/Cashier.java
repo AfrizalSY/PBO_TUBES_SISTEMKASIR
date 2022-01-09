@@ -68,22 +68,22 @@ public class Cashier implements CashierInterface{
 
     @Override
     public void editItem(Item n) {
-
+        
     }
 
     @Override
     public void editItem(Item n, Order o) {
-
+        
     }
 
     @Override
     public void deleteItem(Item n) {
-
+        
     }
 
     @Override
     public void deleteItem(Item n, Order o) {
-
+        
     }
     
     public void showAllPayment(Payment p){

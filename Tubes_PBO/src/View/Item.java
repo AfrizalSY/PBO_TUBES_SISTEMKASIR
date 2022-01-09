@@ -5,6 +5,11 @@
  */
 package View;
 
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author WIBU
@@ -17,7 +22,39 @@ public class Item extends javax.swing.JFrame {
     public Item() {
         initComponents();
     }
-
+    public JTable getTableProduk(){
+        return tabelproduk;
+    }
+    public JButton getbtnKembali(){
+        return btnkembali;
+    }
+    public JButton getbtnUpdate(){
+        return btnupdate;
+    }
+    public JButton getbtnTambah(){
+        return btnsave;
+    }
+    public JButton getbtnDelete(){
+        return btndelete;
+    }
+    public JTextField getTxtJenis(){
+        return txtJenis;
+    }
+    public JTextField getTxtNama(){
+        return txtNama;
+    }
+    public JTextField getTxtVorH(){
+        return txtVorH;
+    }
+    public JTextField getTxtHarga(){
+        return txtharga;
+    }
+    public void addActionListener(ActionListener e) {
+        btndelete.addActionListener(e);
+        btnkembali.addActionListener(e);
+        btnsave.addActionListener(e);
+        btnkembali.addActionListener(e);
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

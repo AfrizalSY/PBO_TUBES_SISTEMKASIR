@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+
 /**
  *
  * @author WIBU
@@ -18,6 +21,27 @@ public class Option extends javax.swing.JFrame {
         initComponents();
     }
 
+    public JButton getbtnLogout() {
+        return btnlogout;
+    }
+
+    public JButton getbtnOrder() {
+        return btnOrder;
+    }
+
+    public JButton getbtnShowOrder() {
+        return btnShowOrder;
+    }
+
+    public JButton getbtnProduk() {
+        return btnproduk1;
+    }
+    public void addActionListener(ActionListener e) {
+        btnOrder.addActionListener(e);
+        btnShowOrder.addActionListener(e);
+        btnlogout.addActionListener(e);
+        btnproduk1.addActionListener(e);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -19,7 +19,6 @@ public class OrderItem {
         this.item = item;
     }
 
-    
     public int getQuantity() {
         return quantity;
     }
