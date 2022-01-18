@@ -36,6 +36,7 @@ public class OptionController implements ActionListener{
             frame.dispose();
         } else if(source.equals(frame.getbtnShowOrder())){
             new ShowAllOrderController();
+            frame.dispose();
         } else if(source.equals(frame.getbtnProduk())){
             new ItemController();
             frame.dispose();

@@ -5,13 +5,15 @@
  */
 package Model;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author WIBU
  */
 public interface CashierInterface {
 
-    public void addItem(Item n);
+    public void addItem(Item n)throws SQLException;
 
     public void addItem(Item n, int qty, Order o);
 

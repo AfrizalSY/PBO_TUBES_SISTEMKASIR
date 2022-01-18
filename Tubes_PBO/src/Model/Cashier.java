@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package Model;
-
+import Database.Database;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.SQLException;
 
 /**
  *
@@ -17,6 +19,7 @@ public class Cashier implements CashierInterface{
     private String password;
     private ArrayList<Order> listOrder;
     private ArrayList<Payment> listPayment;
+    private Database db;
     
     public Cashier(String name, String user , String pass) {
         this.name = name;
@@ -57,15 +60,42 @@ public class Cashier implements CashierInterface{
         this.password = password;
     }
     
-    public void getItem(Item n){
-        
+    public ArrayList<Item> getAllItem() throws SQLException{
+        db.connectDB();
+        ArrayList<Item> data = new ArrayList<>();
+        String sql = "SELECT * FROM Item";
+        db.executeQuery(sql);
+        while(db.getRs().next()){
+            int item_id = db.getRs().getInt("item_id");
+            String name = db.getRs().getString("item_name");
+            double price = db.getRs().getDouble("item_price");
+            String jenis = db.getRs().getString("item_jenis");
+            int VoH = db.getRs().getInt("volume_or_weight");
+            if(jenis.equals("Makanan")){
+                data.add(new Food(name,price,jenis,VoH));
+            }else if (jenis.equals("Minuman")){
+                data.add(new Beverage(name,price,jenis,VoH));
+            }
+        }
+        return data;
     }
     public Order createOrder(int tableNo){
         return new Order(tableNo);        
     }
     @Override
-    public void addItem(Item n) {
-        
+    public void addItem(Item n) throws SQLException{
+        db.connectDB();
+        String sql = "INSERT INTO 'Item'"
+                + "('item_id','item_name','item_price','item_jenis','volume_or_weight')" 
+                + "VALUES(NULL,'%s', '%s', '%s', '%s');";
+        if(n instanceof Food){
+            Food f = (Food) n;
+            sql = String.format(sql,f.getName(),f.getPrice(),f.getJenis(),f.getWeight());
+        }else if(n instanceof Beverage){
+            Beverage Bf = (Beverage) n;
+            sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(),Bf.getVolume());
+        }
+        db.execute(sql);
     }
 
     @Override

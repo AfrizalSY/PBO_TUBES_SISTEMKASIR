@@ -12,7 +12,7 @@ package Model;
 public class Food extends Item{
     private int weight;
 
-    public Food(String name, int price,String Jenis, int weight) {
+    public Food(String name, double price,String Jenis, int weight) {
         super(name, price,Jenis);
         this.weight = weight;
     }

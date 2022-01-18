@@ -10,15 +10,21 @@ package Model;
  * @author WIBU
  */
 public abstract class Item {
+    private int item_id;
     private String name;
-    private int price;
+    private double price;
     private String jenis;
-    public Item(String name, int price,String jenis) {
+    public Item(String name, double price,String jenis) {
         this.name = name;
         this.price = price;
         this.jenis = jenis;
     }
-
+    public int getItem_Id(){
+        return item_id;
+    }
+    public void setItem_Id(int item_id){
+        this.item_id = item_id;
+    }
     public String getName() {
         return name;
     }
@@ -27,11 +33,11 @@ public abstract class Item {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

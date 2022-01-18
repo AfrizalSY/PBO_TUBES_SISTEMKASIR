@@ -13,7 +13,7 @@ public class Beverage extends Item {
 
     private int volume;
 
-    public Beverage(String name, int price,String Jenis, int volume) {
+    public Beverage(String name, double price,String Jenis, int volume) {
         super(name, price,Jenis);
         this.volume = volume;
     }

@@ -6,6 +6,7 @@
 package View;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -14,12 +15,12 @@ import javax.swing.JTextField;
  *
  * @author WIBU
  */
-public class Item extends javax.swing.JFrame {
+public class Item_View extends javax.swing.JFrame {
 
     /**
      * Creates new form Item
      */
-    public Item() {
+    public Item_View() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -55,6 +56,9 @@ public class Item extends javax.swing.JFrame {
         btnkembali.addActionListener(e);
         btnsave.addActionListener(e);
         btnkembali.addActionListener(e);
+    }
+    public void addMouseAdapter(MouseAdapter e) {
+        tabelproduk.addMouseListener(e);
     }    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,11 +113,11 @@ public class Item extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Jenis", "Nama", "Harga", "Volume/Weight"
+                "id", "Nama", "Harga", "Jenis", "Volume/Weight"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -312,20 +316,21 @@ public class Item extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Item.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Item_View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Item.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Item_View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Item.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Item_View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Item.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Item_View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Item().setVisible(true);
+                new Item_View().setVisible(true);
             }
         });
     }
