@@ -8,6 +8,7 @@ package View;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -39,13 +40,16 @@ public class Item_View extends javax.swing.JFrame {
     public JButton getbtnDelete(){
         return btndelete;
     }
-    public JTextField getTxtJenis(){
-        return txtJenis;
+    public JRadioButton getBtnMakanan(){
+        return RadioBtnMakanan;
+    }
+    public JRadioButton getBtnMinuman(){
+        return RadioBtnMinuman;
     }
     public JTextField getTxtNama(){
         return txtNama;
     }
-    public JTextField getTxtVorH(){
+    public JTextField getTxtVoW(){
         return txtVorH;
     }
     public JTextField getTxtHarga(){
@@ -69,6 +73,7 @@ public class Item_View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         btndelete = new javax.swing.JButton();
         btnupdate = new javax.swing.JButton();
         btnsave = new javax.swing.JButton();
@@ -77,13 +82,14 @@ public class Item_View extends javax.swing.JFrame {
         btnkembali = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtJenis = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtharga = new javax.swing.JTextField();
         txtNama = new javax.swing.JTextField();
         txtVorH = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        RadioBtnMakanan = new javax.swing.JRadioButton();
+        RadioBtnMinuman = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,12 +150,6 @@ public class Item_View extends javax.swing.JFrame {
 
         jLabel5.setText("Jenis");
 
-        txtJenis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtJenisActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Nama");
 
         jLabel3.setText("Harga");
@@ -174,6 +174,17 @@ public class Item_View extends javax.swing.JFrame {
 
         jLabel4.setText("Volume/Weight");
 
+        buttonGroup1.add(RadioBtnMakanan);
+        RadioBtnMakanan.setText("Makanan");
+
+        buttonGroup1.add(RadioBtnMinuman);
+        RadioBtnMinuman.setText("Minuman");
+        RadioBtnMinuman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RadioBtnMinumanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,13 +204,17 @@ public class Item_View extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(30, 30, 30)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtVorH, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtharga, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtJenis)
-                                    .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtVorH, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtharga, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNama, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(RadioBtnMakanan)
+                                .addGap(31, 31, 31)
+                                .addComponent(RadioBtnMinuman)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 45, Short.MAX_VALUE)
@@ -229,10 +244,11 @@ public class Item_View extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtJenis, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RadioBtnMakanan)
+                    .addComponent(RadioBtnMinuman))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -283,10 +299,6 @@ public class Item_View extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnkembaliActionPerformed
 
-    private void txtJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJenisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtJenisActionPerformed
-
     private void txthargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txthargaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txthargaActionPerformed
@@ -298,6 +310,10 @@ public class Item_View extends javax.swing.JFrame {
     private void txtVorHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVorHActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtVorHActionPerformed
+
+    private void RadioBtnMinumanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioBtnMinumanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RadioBtnMinumanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,10 +352,13 @@ public class Item_View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton RadioBtnMakanan;
+    private javax.swing.JRadioButton RadioBtnMinuman;
     private javax.swing.JButton btndelete;
     private javax.swing.JButton btnkembali;
     private javax.swing.JButton btnsave;
     private javax.swing.JButton btnupdate;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -347,7 +366,6 @@ public class Item_View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabelproduk;
-    private javax.swing.JTextField txtJenis;
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtVorH;
     private javax.swing.JTextField txtharga;

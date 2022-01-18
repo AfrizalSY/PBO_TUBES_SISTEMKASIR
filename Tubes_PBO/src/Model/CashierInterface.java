@@ -13,13 +13,13 @@ import java.sql.SQLException;
  */
 public interface CashierInterface {
 
-    public void addItem(Item n)throws SQLException;
+    public void addItem(Item n, int VoW)throws SQLException;
 
     public void addItem(Item n, int qty, Order o);
 
-    public void editItem(Item n);
+    public void editItem(Item n, int VoW) throws SQLException;
 
-    public void editItem(Item n, Order o);
+    // public void editItem(Item n, Order o);
 
     public void deleteItem(Item n);
 

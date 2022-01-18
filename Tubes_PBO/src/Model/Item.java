@@ -9,7 +9,7 @@ package Model;
  *
  * @author WIBU
  */
-public abstract class Item {
+public class Item {
     private int item_id;
     private String name;
     private double price;
@@ -49,5 +49,4 @@ public abstract class Item {
         this.jenis = jenis;
     }
     
-    public abstract void getItem();
 }

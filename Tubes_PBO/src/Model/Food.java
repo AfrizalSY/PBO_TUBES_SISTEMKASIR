@@ -25,7 +25,6 @@ public class Food extends Item{
         this.weight = weight;
     }
     
-    @Override
     public void getItem() {
         System.out.println("Item info :");
         System.out.println("\tName \t: " + this.getName());

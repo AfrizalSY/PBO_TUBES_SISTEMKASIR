@@ -16,7 +16,6 @@ public class Order {
     private int orderID;
     private int tableNumber;
     private ArrayList<OrderItem> listItem;
-    private double totalPrice;
 
     public Order(int tableNumber) {
         this.tableNumber = tableNumber;

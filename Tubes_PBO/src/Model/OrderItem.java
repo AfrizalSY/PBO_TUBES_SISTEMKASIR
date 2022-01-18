@@ -35,7 +35,7 @@ public class OrderItem {
         this.item = item;
     }   
     
-    public float getTotalPrice(){
+    public double getTotalPrice(){
         return this.item.getPrice() * quantity;
     }
 

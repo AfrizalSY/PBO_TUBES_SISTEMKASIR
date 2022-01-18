@@ -30,7 +30,7 @@ public class OrderController implements ActionListener{
         if (source.equals(frame.getBtnTambahOrder())) {
         } else if (source.equals(frame.getBtnBayar())) {
             new BayarController();
-            frame.dispose();
+            // frame.dispose();
         } else if(source.equals(frame.getBtnHapus())){
         } else if(source.equals(frame.getBtnKembali())){
             new OptionController();

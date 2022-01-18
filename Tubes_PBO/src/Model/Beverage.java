@@ -26,7 +26,6 @@ public class Beverage extends Item {
         this.volume = volume;
     }
     
-    @Override
     public void getItem() {
         System.out.println("Item info :");
         System.out.println("\tName \t: " + this.getName());
