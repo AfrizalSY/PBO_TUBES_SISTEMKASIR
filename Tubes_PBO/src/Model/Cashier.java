@@ -86,20 +86,17 @@ public class Cashier implements CashierInterface{
     @Override
     public void addItem(Food f) throws SQLException{
         db.connectDB();
-        String sql = "INSERT INTO item "
-                + "('item_id',item_name','item_price','item_jenis','volume_or_weight') " 
-                + "VALUES(NULL,'%s', %f, '%s', %d)";
-        sql = String.format(sql,f.getName(),f.getPrice(),f.getJenis(),f.getWeight());
+        String sql = "INSERT INTO item (item_id,item_name,item_price,item_jenis,volume_or_weight) "
+                + "VALUES(NULL,'"+f.getName()+"', "+f.getPrice()+", '"+f.getJenis()+"', "+f.getWeight()+");";
         db.execute(sql);
     }
 
     @Override
     public void addItem(Beverage Bf) throws SQLException{
         db.connectDB();
-        String sql = "INSERT INTO item "
-                + "('item_id',item_name','item_price','item_jenis','volume_or_weight') " 
-                + "VALUES(NULL,'%s', '%f', '%s', '%d')";
-        sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(),Bf.getVolume());
+        String sql = "INSERT INTO item (item_id,item_name,item_price,item_jenis,volume_or_weight) "
+                + "VALUES(NULL,'"+Bf.getName()+"', "+Bf.getPrice()+", '"+Bf.getJenis()+"', "+Bf.getVolume()+");";
+        // sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(),Bf.getVolume());
         db.execute(sql);
     }
 
@@ -130,8 +127,10 @@ public class Cashier implements CashierInterface{
     // }
 
     @Override
-    public void deleteItem(Item n) {
-        
+    public void deleteItem(String idx) throws SQLException {
+        db.connectDB();
+        String sql = "DELETE FROM item WHERE item.item_id= "+ idx;
+        db.executeQuery(sql);
     }
 
     @Override

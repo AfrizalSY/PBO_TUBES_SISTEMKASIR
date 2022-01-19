@@ -156,7 +156,7 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
         String VoWTxt = view.getTxtVoW().getText();
         int VoW = Integer.parseInt(VoWTxt);
         if (jenis.isEmpty() || name.isEmpty() || hargaTxt.isEmpty() || VoWTxt.isEmpty()) {
-            msg.showMessage("Data tidak boleh negatif", "Validasi error", 2);
+            msg.showMessage("Data tidak boleh kosong", "Validasi error", 2);
         } else {
             boolean found = false;
             try {
@@ -209,5 +209,8 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                 msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
             }
         }
+    }
+    public void doDelete(){
+        
     }
 }
