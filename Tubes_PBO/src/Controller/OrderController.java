@@ -15,26 +15,26 @@ import javax.swing.JFrame;
  * @author WIBU
  */
 public class OrderController implements ActionListener{
-    private Order frame;
+    private Order view;
     public OrderController(){
-        frame = new Order();
-        frame.setTitle("Option");
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.addActionListener(this);
+        view = new Order();
+        view.setTitle("Option");
+        view.setVisible(true);
+        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        view.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         Object source = ae.getSource();
-        if (source.equals(frame.getBtnTambahOrder())) {
-        } else if (source.equals(frame.getBtnBayar())) {
+        if (source.equals(view.getBtnTambahOrder())) {
+        } else if (source.equals(view.getBtnBayar())) {
             new BayarController();
-            // frame.dispose();
-        } else if(source.equals(frame.getBtnHapus())){
-        } else if(source.equals(frame.getBtnKembali())){
+            // view.dispose();
+        } else if(source.equals(view.getBtnHapus())){
+        } else if(source.equals(view.getBtnKembali())){
             new OptionController();
-            frame.dispose();
+            view.dispose();
         }
     }
 }

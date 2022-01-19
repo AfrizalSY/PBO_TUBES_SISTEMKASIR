@@ -15,31 +15,31 @@ import javax.swing.JFrame;
  * @author WIBU
  */
 public class OptionController implements ActionListener{
-    private Option frame;
+    private Option view;
     
     public OptionController(){
-        frame = new Option();
-        frame.setTitle("Option");
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.addActionListener(this);
+        view = new Option();
+        view.setTitle("Option");
+        view.setVisible(true);
+        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        view.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         Object source = ae.getSource();
-        if (source.equals(frame.getbtnLogout())) {
+        if (source.equals(view.getbtnLogout())) {
             new LoginController();
-            frame.dispose();
-        } else if (source.equals(frame.getbtnOrder())) {
+            view.dispose();
+        } else if (source.equals(view.getbtnOrder())) {
             new OrderController();
-            frame.dispose();
-        } else if(source.equals(frame.getbtnShowOrder())){
+            view.dispose();
+        } else if(source.equals(view.getbtnShowOrder())){
             new ShowAllOrderController();
-            frame.dispose();
-        } else if(source.equals(frame.getbtnProduk())){
+            view.dispose();
+        } else if(source.equals(view.getbtnProduk())){
             new ItemController();
-            frame.dispose();
+            view.dispose();
         }
     }
 }

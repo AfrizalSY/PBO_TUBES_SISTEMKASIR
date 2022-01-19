@@ -11,13 +11,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 public class ShowAllOrderController implements ActionListener{
-    private ShowAllOrder frame;
+    private ShowAllOrder view;
     
     public ShowAllOrderController(){
-        frame = new ShowAllOrder();
-        frame.setTitle("Option");
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        view = new ShowAllOrder();
+        view.setTitle("Option");
+        view.setVisible(true);
+        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame.addActionListener(this);
     }
 

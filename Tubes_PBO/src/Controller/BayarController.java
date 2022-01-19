@@ -15,13 +15,13 @@ import javax.swing.JFrame;
  * @author WIBU
  */
 public class BayarController implements ActionListener{
-    private Bayar frame;
+    private Bayar view;
     public BayarController(){
-        frame = new Bayar();
-        frame.setTitle("Bayar");
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.addActionListener(this);
+        view = new Bayar();
+        view.setTitle("Bayar");
+        view.setVisible(true);
+        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        view.addActionListener(this);
     }
     
     
@@ -29,11 +29,11 @@ public class BayarController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         Object source = ae.getSource();
-        if (source.equals(frame.getBtnBayar())) {
-        } else if(source.equals(frame.getKembalian())){
-        } else if(source.equals(frame.getBtnKembali())){
+        if (source.equals(view.getBtnBayar())) {
+        } else if(source.equals(view.getKembalian())){
+        } else if(source.equals(view.getBtnKembali())){
             new OrderController();
-            frame.dispose();
+            view.dispose();
         }
     }
 }

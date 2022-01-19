@@ -18,7 +18,7 @@ public class Cashier implements CashierInterface{
     private String password;
     private ArrayList<Order> listOrder;
     private ArrayList<Payment> listPayment;
-    private Database db;
+    private Database db = new Database();
     
     public Cashier(String name, String user , String pass) {
         this.name = name;
@@ -60,41 +60,46 @@ public class Cashier implements CashierInterface{
     }
     
     public ArrayList<Item> getAllItem() throws SQLException{
+        System.out.println("Test");
         db.connectDB();
         ArrayList<Item> data = new ArrayList<>();
-        String sql = "SELECT * FROM Item";
+        String sql = "SELECT * FROM item";
         db.executeQuery(sql);
         while(db.getRs().next()){
+            int id = db.getRs().getInt("item_id");
             String name = db.getRs().getString("item_name");
             double price = db.getRs().getDouble("item_price");
             String jenis = db.getRs().getString("item_jenis");
             int VoW = db.getRs().getInt("volume_or_weight");
             if(jenis.equals("Makanan")){
-                data.add(new Food(name,price,jenis,VoW));
+                data.add(new Food(id,name,price,jenis,VoW));
             }else if (jenis.equals("Minuman")){
-                data.add(new Beverage(name,price,jenis,VoW));
+                data.add(new Beverage(id,name,price,jenis,VoW));
             }
         }
+        db.disconnectDB();
         return data;
     }
     public Order createOrder(int tableNo){
         return new Order(tableNo);        
     }
     @Override
-    public void addItem(Item n, int VoW) throws SQLException{
+    public void addItem(Food f) throws SQLException{
         db.connectDB();
-        String sql = "INSERT INTO 'Item'"
-                + "('item_id','item_name','item_price','item_jenis','volume_or_weight')" 
-                + "VALUES(NULL,'%s', '%s', '%s', '%s');";
-        if(n instanceof Food){
-            Food f = (Food) n;
-            VoW = f.getWeight();
-            sql = String.format(sql,f.getName(),f.getPrice(),f.getJenis(),VoW);
-        }else if(n instanceof Beverage){
-            Beverage Bf = (Beverage) n;
-            VoW = Bf.getVolume();
-            sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(),VoW);
-        }
+        String sql = "INSERT INTO item "
+                + "('item_id',item_name','item_price','item_jenis','volume_or_weight') " 
+                + "VALUES(NULL,'%s', %f, '%s', %d)";
+        sql = String.format(sql,f.getName(),f.getPrice(),f.getJenis(),f.getWeight());
+        db.execute(sql);
+    }
+
+    @Override
+    public void addItem(Beverage Bf) throws SQLException{
+        db.connectDB();
+        String sql = "INSERT INTO item "
+                + "('item_id',item_name','item_price','item_jenis','volume_or_weight') " 
+                + "VALUES(NULL,'%s', '%f', '%s', '%d')";
+        sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(),Bf.getVolume());
         db.execute(sql);
     }
 
@@ -106,15 +111,15 @@ public class Cashier implements CashierInterface{
     @Override
     public void editItem(Item n, int VoW) throws SQLException {
         db.connectDB();
-        String sql = "UPDATE 'Item' SET 'Item_price' = '%f', 'item_jenis' = '%s','volume_or_weight' = '%d' WHERE 'Item'.'item_name' = '%s'";
+        String sql = "UPDATE 'Item' SET 'Item_price' = '%f', 'item_jenis' = '%s','volume_or_weight' = '%d' WHERE 'item'.'item_name' = '%s'";
         if(n instanceof Food){
             Food f = (Food) n;
-            VoW = f.getWeight();
-            sql = String.format(sql,f.getName(),f.getPrice(),f.getJenis(),VoW);
+            // VoW = f.getWeight();
+            sql = String.format(sql,f.getName(),f.getPrice(),f.getJenis(),f.getWeight());
         }else if(n instanceof Beverage){
             Beverage Bf = (Beverage) n;
-            VoW = Bf.getVolume();
-            sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(),VoW);
+            // VoW = Bf.getVolume();
+            sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(), Bf.getVolume());
         }
         db.execute(sql);
     }

@@ -14,7 +14,13 @@ public class Item {
     private String name;
     private double price;
     private String jenis;
-    public Item(String name, double price,String jenis) {
+    public Item(int item_id, String name, double price, String jenis) {
+        this.item_id = item_id;
+        this.name = name;
+        this.price = price;
+        this.jenis = jenis;
+    }
+    public Item(String name, double price, String jenis) {
         this.name = name;
         this.price = price;
         this.jenis = jenis;

@@ -13,7 +13,9 @@ import java.sql.SQLException;
  */
 public interface CashierInterface {
 
-    public void addItem(Item n, int VoW)throws SQLException;
+    public void addItem(Food f)throws SQLException;
+
+    public void addItem(Beverage Bf)throws SQLException;
 
     public void addItem(Item n, int qty, Order o);
 

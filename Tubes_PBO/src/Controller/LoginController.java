@@ -20,30 +20,30 @@ import java.sql.SQLException;
  */
 public class LoginController extends MouseAdapter implements ActionListener, BaseController {
 
-    private Login loginFrame;
+    private Login view;
     private Database db;
 
     public LoginController() {
-        this.loginFrame = new Login();
+        this.view = new Login();
         this.db = new Database();
-        loginFrame.setTitle("Login Kasir");
-        this.loginFrame.resetForm();
-        loginFrame.setVisible(true);
-        loginFrame.addActionListener(this);
+        view.setTitle("Login Kasir");
+        this.view.resetForm();
+        view.setVisible(true);
+        view.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         Object source = ae.getSource();
-        if (source.equals(loginFrame.btnlogin())) {
+        if (source.equals(view.btnlogin())) {
             doLogin();
         }
     }
 
     public void doLogin(){
         try{
-            String username = this.loginFrame.getUsername();
-            String pass = this.loginFrame.getPassword();
+            String username = this.view.getUsername();
+            String pass = this.view.getPassword();
             db.connectDB();
             String sql = "SELECT * FROM kasir WHERE username = '%s' and password = '%s'";
             sql = String.format(sql, username, pass);
@@ -56,7 +56,7 @@ public class LoginController extends MouseAdapter implements ActionListener, Bas
                     cashier.setUsername(db.getRs().getString("username"));
                 }
                 new OptionController();
-                loginFrame.dispose();
+                view.dispose();
             }
             db.disconnectDB();
         }catch(SQLException e){
