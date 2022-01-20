@@ -60,7 +60,6 @@ public class Cashier implements CashierInterface{
     }
     
     public ArrayList<Item> getAllItem() throws SQLException{
-        System.out.println("Test");
         db.connectDB();
         ArrayList<Item> data = new ArrayList<>();
         String sql = "SELECT * FROM item";
@@ -89,6 +88,7 @@ public class Cashier implements CashierInterface{
         String sql = "INSERT INTO item (item_id,item_name,item_price,item_jenis,volume_or_weight) "
                 + "VALUES(NULL,'"+f.getName()+"', "+f.getPrice()+", '"+f.getJenis()+"', "+f.getWeight()+");";
         db.execute(sql);
+        db.disconnectDB();
     }
 
     @Override
@@ -98,6 +98,7 @@ public class Cashier implements CashierInterface{
                 + "VALUES(NULL,'"+Bf.getName()+"', "+Bf.getPrice()+", '"+Bf.getJenis()+"', "+Bf.getVolume()+");";
         // sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(),Bf.getVolume());
         db.execute(sql);
+        db.disconnectDB();
     }
 
     @Override
@@ -106,31 +107,32 @@ public class Cashier implements CashierInterface{
     }
 
     @Override
-    public void editItem(Item n, int VoW) throws SQLException {
+    public void editItem(Food f) throws SQLException {
         db.connectDB();
-        String sql = "UPDATE 'Item' SET 'Item_price' = '%f', 'item_jenis' = '%s','volume_or_weight' = '%d' WHERE 'item'.'item_name' = '%s'";
-        if(n instanceof Food){
-            Food f = (Food) n;
-            // VoW = f.getWeight();
-            sql = String.format(sql,f.getName(),f.getPrice(),f.getJenis(),f.getWeight());
-        }else if(n instanceof Beverage){
-            Beverage Bf = (Beverage) n;
-            // VoW = Bf.getVolume();
-            sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(), Bf.getVolume());
-        }
-        db.execute(sql);
+        String sql = "UPDATE item SET Item_price = "+f.getPrice()+", item_jenis = '"+f.getJenis()+
+                    "',volume_or_weight = "+f.getWeight()+" WHERE item.item_name = '"+f.getName()+"'";
+        db.executeUpdate(sql);
+        db.disconnectDB();
     }
-
+    @Override
+    public void editItem(Beverage Bf) throws SQLException {
+        db.connectDB();
+        String sql = "UPDATE item SET Item_price = "+Bf.getPrice()+", item_jenis = '"+Bf.getJenis()+
+                    "',volume_or_weight = "+Bf.getVolume()+" WHERE item.item_name = '"+Bf.getName()+"'";
+        db.executeUpdate(sql);
+        db.disconnectDB();
+    }
     // @Override
     // public void editItem(Item n, Order o) {
         
     // }
 
     @Override
-    public void deleteItem(String idx) throws SQLException {
+    public void deleteItem(int idx) throws SQLException {
         db.connectDB();
-        String sql = "DELETE FROM item WHERE item.item_id= "+ idx;
-        db.executeQuery(sql);
+        String sql = "DELETE FROM item WHERE item.item_id="+ idx;
+        db.executeUpdate(sql);
+        db.disconnectDB();
     }
 
     @Override

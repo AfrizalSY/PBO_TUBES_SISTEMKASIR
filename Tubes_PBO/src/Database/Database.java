@@ -32,10 +32,15 @@ public class Database {
         this.rs = stmt.executeQuery(query);
     }
 
-    // Insert, Update, delete
+    // Insert
     public void execute(String query) throws SQLException{
         stmt.execute(query);
     }
+    //, Update, delete
+    public void executeUpdate(String query) throws SQLException{
+        stmt.executeUpdate(query);
+    }
+
 
     public ResultSet getRs(){
         return this.rs;

@@ -35,7 +35,6 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
         view.setVisible(true);
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         view.addActionListener(this);
-        System.out.println("PUNTEN");
         this.loadProduk();
         view.getTableProduk().setAutoCreateRowSorter(true);
         view.addMouseAdapter(this);
@@ -52,64 +51,66 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
         } else if (source.equals(view.getbtnTambah())) {
             doTambahDanUpdate();
         } else if (source.equals(view.getbtnDelete())) {
-
+            doDelete();
         } else if (source.equals(view.getbtnReset())) {
+            // new ItemController();
+            this.loadProduk();
             view.ResetForm();
         }
     }
 
-    // @Override
-    // public void mousePressed(MouseEvent me) {
-    //     Object source = me.getSource();
-    //     if(source.equals(view.getTableProduk())&& me.getClickCount()==2){
-    //         try{
-    //             JTable target = (JTable) me.getSource();
-    //             int row = target.getSelectedRow();
-    //             String nama = (String) view.getTableProduk().getValueAt(row, 1);
-    //             int index = -1;
-    //             ArrayList<Item> data = this.cashier.getAllItem();
-    //             for(int i = 0; i < data.size() && index ==-1; i++){
-    //                 Item currentData = data.get(i);
-    //                 if(nama.equals(currentData.getName())){
-    //                     index = i;
-    //                 }
-    //             }
-    //             if(index == -1){
-    //                 Item it = data.get(index);
-    //                 if(it instanceof Food){
-    //                     Food f = (Food) it;
-    //                     if(f.getJenis().equals("Makanan")){
-    //                         view.setBtnMakanan();
-    //                     }else{
-    //                         view.setBtnMinuman();
-    //                     }
-    //                     view.setTxtNama(f.getName());
-    //                     view.setTxtHarga(String.valueOf(f.getPrice()));
-    //                     view.setTxtVoW(Integer.toString(f.getWeight()));
-    //                 }else if(it instanceof Beverage){
-    //                     Beverage Bf = (Beverage) it;
-    //                     if(Bf.getJenis().equals("Makanan")){
-    //                         view.setBtnMakanan();
-    //                     }else{
-    //                         view.setBtnMinuman();
-    //                     }
-    //                     view.setTxtNama(Bf.getName());
-    //                     view.setTxtHarga(String.valueOf(Bf.getPrice()));
-    //                     view.setTxtVoW(Integer.toString(Bf.getVolume()));
-    //                 }
-    //             }
-    //         }catch (SQLException ex) {
-    //             msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
-    //         }
-    //     }
-    // }
+    @Override
+    public void mousePressed(MouseEvent me) {
+        Object source = me.getSource();
+        if(source.equals(view.getTableProduk())&& me.getClickCount()==2){
+            try{
+                JTable target = (JTable) me.getSource();
+                int row = target.getSelectedRow();
+                String nama = (String) view.getTableProduk().getValueAt(row, 1);
+                int index = -1;
+                ArrayList<Item> data = this.cashier.getAllItem();
+                for(int i = 0; i < data.size() && index ==-1; i++){
+                    Item currentData = data.get(i);
+                    if(nama.equals(currentData.getName())){
+                        index = i;
+                    }
+                }
+                if(index != -1){
+                    Item it = data.get(index);
+                    if(it instanceof Food){
+                        Food f = (Food) it;
+                        if(f.getJenis().equals("Makanan")){
+                            view.setBtnMakanan();
+                        }else{
+                            view.setBtnMinuman();
+                        }
+                        view.setTxtNama(f.getName());
+                        view.getTxtNama().setEnabled(false);
+                        view.setTxtHarga(String.valueOf(f.getPrice()));
+                        view.setTxtVoW(Integer.toString(f.getWeight()));
+                    }else if(it instanceof Beverage){
+                        Beverage Bf = (Beverage) it;
+                        if(Bf.getJenis().equals("Makanan")){
+                            view.setBtnMakanan();
+                        }else{
+                            view.setBtnMinuman();
+                        }
+                        view.setTxtNama(Bf.getName());
+                        view.getTxtNama().setEnabled(false);
+                        view.setTxtHarga(String.valueOf(Bf.getPrice()));
+                        view.setTxtVoW(Integer.toString(Bf.getVolume()));
+                    }
+                }
+            }catch (SQLException ex) {
+                msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
+            }
+        }
+    }
     public void loadProduk() {
         try {
             DefaultTableModel tbl = (DefaultTableModel) view.getTableProduk().getModel();
             tbl.setRowCount(0);
-            System.out.println("PUNTEN222");
             ArrayList<Item> data = cashier.getAllItem();
-            System.out.println(data);
             if (!data.isEmpty()) {
                 for (int i = 0; i < data.size(); i++) {
                     Item currentData = data.get(i);
@@ -173,6 +174,7 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                         f.setJenis(jenis);
                         f.setWeight(VoW);
                         found = true;
+                        cashier.editItem(f);
                     } else if (currentData instanceof Beverage && name.equals(currentData.getName())) {
                         Beverage Bf = (Beverage) currentData;
                         Bf.setItem_Id(currentData.getItem_Id());
@@ -181,18 +183,18 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                         Bf.setJenis(jenis);
                         Bf.setVolume(VoW);
                         found = true;
+                        cashier.editItem(Bf);
                     }
                 }
                 if (!found) {
                     if (jenis.equals("Makanan")) {
                         Food f = new Food(name, harga, jenis, VoW);
-                        this.cashier.addItem(f);
+                        cashier.addItem(f);
                     } else if (jenis.equals("Minuman")) {
                         Beverage Bf = new Beverage(name, harga, jenis, VoW);
-                        this.cashier.addItem(Bf);
+                        cashier.addItem(Bf);
                     }
                     msg.showMessage("Input data berhasil", "Success", 1);
-                    this.loadProduk();
                 }
                 //      if(f.getJenis().equals("Makanan")){
                 //         Item fi = (Food) f;
@@ -205,12 +207,30 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                 //      msg.showMessage("Data berhasil diupdate", "Success", 1);
                 //      this.loadProduk();
                 //  }
+                this.loadProduk();
             } catch (SQLException ex) {
                 msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
             }
         }
     }
     public void doDelete(){
-        
+        try{
+            // DefaultTableModel tbl = (DefaultTableModel) view.getTableProduk().getModel();
+            ArrayList<Item> data = cashier.getAllItem();
+            int row = view.getTableProduk().getSelectedRow();
+            int num_id = (int) view.getTableProduk().getValueAt(row,0);
+            int idx = -1;
+            for(int i =0; i<data.size()& idx == -1;i++){
+                Item currentData = data.get(i);
+                if(num_id==currentData.getItem_Id()){
+                    idx = i;
+                    cashier.deleteItem(num_id);
+                    msg.showMessage("Data berhasil dihapus", "Success", 1);
+                }
+            }
+            loadProduk();
+        }catch (SQLException ex){
+            msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
+        }
     }
 }

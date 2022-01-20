@@ -19,11 +19,11 @@ public interface CashierInterface {
 
     public void addItem(Item n, int qty, Order o);
 
-    public void editItem(Item n, int VoW) throws SQLException;
+    public void editItem(Food f) throws SQLException;
 
-    // public void editItem(Item n, Order o);
+    public void editItem(Beverage Bf) throws SQLException;
 
-    public void deleteItem(String idx) throws SQLException;
+    public void deleteItem(int idx) throws SQLException;
 
     public void deleteItem(Item n, Order o);
 }
