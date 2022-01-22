@@ -13,12 +13,12 @@ public class Bank extends Payment implements Tax{
     
     private String bankName;
     private String bankID;
-
-    public Bank(String bankName, String bankID, float amount, Order order) {
+  public Bank(float amount, Order order,String bankName, String bankID) {
         super(amount, order);
         this.bankName = bankName;
         this.bankID = bankID;
     }
+  
     public String getBankName() {
         return bankName;
     }

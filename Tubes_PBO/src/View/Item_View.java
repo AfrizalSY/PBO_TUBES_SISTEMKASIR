@@ -58,11 +58,11 @@ public class Item_View extends javax.swing.JFrame {
     public JTextField getTxtHarga(){
         return txtharga;
     }
-    public void setBtnMakanan(){
-        this.RadioBtnMakanan.setSelected(true);
+    public void setBtnMakanan(Boolean b){
+        this.RadioBtnMakanan.setSelected(b);
     }
-    public void setBtnMinuman(){
-        this.RadioBtnMinuman.setSelected(true);
+    public void setBtnMinuman(Boolean b){
+        this.RadioBtnMinuman.setSelected(b);
     }
     public void setTxtNama(String v){
         this.txtNama.setText(v);
@@ -74,17 +74,20 @@ public class Item_View extends javax.swing.JFrame {
         this.txtharga.setText(v);
     }
     public void ResetForm(){
-        RadioBtnMakanan.setSelected(false);
-        RadioBtnMinuman.setSelected(false);
+        buttonGroup1.clearSelection();
         txtNama.setText("");
         txtharga.setText("");
         txtVorH.setText("");
+        txtNama.setEnabled(true);
+        btndelete.setEnabled(false);
+        btnupdate.setEnabled(false);
     }
     public void addActionListener(ActionListener e) {
         btndelete.addActionListener(e);
         btnkembali.addActionListener(e);
         btnsave.addActionListener(e);
-        btnkembali.addActionListener(e);
+        btnupdate.addActionListener(e);
+        btnReset.addActionListener(e);
     }
     public void addMouseAdapter(MouseAdapter e) {
         tabelproduk.addMouseListener(e);
@@ -219,7 +222,7 @@ public class Item_View extends javax.swing.JFrame {
             }
         });
 
-        btnReset.setText("Reset");
+        btnReset.setText("Clear");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetActionPerformed(evt);
@@ -235,9 +238,9 @@ public class Item_View extends javax.swing.JFrame {
                 .addComponent(btnsave, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(btnupdate, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(62, 62, 62)
                 .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
+                .addGap(126, 126, 126))
             .addGroup(layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -330,10 +333,6 @@ public class Item_View extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btndeleteActionPerformed
 
-    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
-
-    }//GEN-LAST:event_btnupdateActionPerformed
-
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
 
     }//GEN-LAST:event_btnsaveActionPerformed
@@ -365,6 +364,10 @@ public class Item_View extends javax.swing.JFrame {
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+
+    }//GEN-LAST:event_btnupdateActionPerformed
 
     /**
      * @param args the command line arguments

@@ -80,9 +80,9 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                     if(it instanceof Food){
                         Food f = (Food) it;
                         if(f.getJenis().equals("Makanan")){
-                            view.setBtnMakanan();
+                            view.setBtnMakanan(true);
                         }else{
-                            view.setBtnMinuman();
+                            view.setBtnMinuman(true);
                         }
                         view.setTxtNama(f.getName());
                         view.getTxtNama().setEnabled(false);
@@ -93,9 +93,9 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                     }else if(it instanceof Beverage){
                         Beverage Bf = (Beverage) it;
                         if(Bf.getJenis().equals("Makanan")){
-                            view.setBtnMakanan();
+                            view.setBtnMakanan(true);
                         }else{
-                            view.setBtnMinuman();
+                            view.setBtnMinuman(true);
                         }
                         view.setTxtNama(Bf.getName());
                         view.getTxtNama().setEnabled(false);
@@ -185,6 +185,7 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                             f.setWeight(VoW);
                             found = true;
                             cashier.editItem(f);
+                            msg.showMessage("Update data berhasil", "Success", 1);
                         } else if (currentData instanceof Beverage && name.equals(currentData.getName())) {
                             Beverage Bf = (Beverage) currentData;
                             Bf.setItem_Id(currentData.getItem_Id());
@@ -194,9 +195,10 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                             Bf.setVolume(VoW);
                             found = true;
                             cashier.editItem(Bf);
+                            msg.showMessage("Update data berhasil", "Success", 1);
                         }
                     }
-                    if (!found) {
+                    if (found==false) {
                         if (jenis.equals("Makanan")) {
                             Food f = new Food(name, harga, jenis, VoW);
                             cashier.addItem(f);
@@ -222,7 +224,7 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
             int row = view.getTableProduk().getSelectedRow();
             int num_id = (int) view.getTableProduk().getValueAt(row,0);
             int idx = -1;
-            for(int i =0; i<data.size()& idx == -1;i++){
+            for(int i =0; i<data.size() && idx == -1;i++){
                 Item currentData = data.get(i);
                 if(num_id==currentData.getItem_Id()){
                     idx = i;
@@ -230,18 +232,17 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                     msg.showMessage("Data berhasil dihapus", "Success", 1);
                 }
             }
-            // loadProduk();
-            new ItemController();
-            view.dispose();
+            view.ResetForm();
         }catch (SQLException ex){
             msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
         }
     }
+
     public boolean isNumber(String s){
         for (int i = 0; i < s.length(); i++)
         if (Character.isDigit(s.charAt(i)) == false)
             return false;
 
         return true;
-    } 
+    }
 }

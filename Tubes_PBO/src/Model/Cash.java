@@ -12,7 +12,7 @@ package Model;
 public class Cash extends Payment implements Tax{
     private double cash;
 
-    public Cash(double cash, float amount, Order order) {
+    public Cash(float amount, Order order,double cash) {
         super(amount, order);
         this.cash = cash;
     }

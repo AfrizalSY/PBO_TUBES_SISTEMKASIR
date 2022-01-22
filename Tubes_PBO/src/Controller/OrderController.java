@@ -8,7 +8,7 @@ import Model.Item;
 import Model.Food;
 import Model.Beverage;
 import Model.Cashier;
-import View.Order;
+import View.Order_View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -22,11 +22,11 @@ import javax.swing.JTable;
  *
  * @author WIBU
  */
-public class OrderController implements ActionListener, BaseController{
-    private Order view;
+public class OrderController extends MouseAdapter implements ActionListener, BaseController{
+    private Order_View view;
     private Cashier cashier = new Cashier();
     public OrderController(){
-        view = new Order();
+        view = new Order_View();
         view.setTitle("Option");
         view.setVisible(true);
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,6 +49,47 @@ public class OrderController implements ActionListener, BaseController{
             view.dispose();
         }
     }
+    public void mousePressed(MouseEvent me) {
+        Object source = me.getSource();
+        if(source.equals(view.getTableItem())&& me.getClickCount()==2){
+            try{
+                JTable target = (JTable) me.getSource();
+                int row = target.getSelectedRow();
+                int item_id= (int) view.getTableItem().getValueAt(row, 0);
+                int index = -1;
+                ArrayList<Item> data = this.cashier.getAllItem();
+                for(int i = 0; i < data.size() && index ==-1; i++){
+                    Item currentData = data.get(i);
+                    if(item_id==currentData.getItem_Id()){
+                        System.out.println("Test");
+                        index = i;
+                    }
+                }
+                if(index != -1){
+                    view.setItemId(view.getTableItem().getValueAt(row, 0).toString());
+                    view.setLblJenis(view.getTableItem().getValueAt(row, 1).toString());
+                    view.setLblItem(view.getTableItem().getValueAt(row, 2).toString());
+                    view.setLblHarga(view.getTableItem().getValueAt(row, 3).toString());
+                    // Item it = data.get(index);
+                    // if(it instanceof Food){
+                    //     Food f = (Food) it;
+                    //     view.setItemId(view.getTableItem().getValueAt(row, 0).toString());
+                    //     view.setLblItem(view.getTableItem().getValueAt(row, 1).toString());
+                    //     view.setLblJenis(view.getTableItem().getValueAt(row, 2).toString());
+                    //     view.setLblHarga(view.getTableItem().getValueAt(row, 3).toString());
+                    // }else if(it instanceof Beverage){
+                    //     Beverage Bf = (Beverage) it;
+                    //     view.setItemId(view.getTableItem().getValueAt(row, 0).toString());
+                    //     view.setLblItem(view.getTableItem().getValueAt(row, 1).toString());
+                    //     view.setLblJenis(view.getTableItem().getValueAt(row, 2).toString());
+                    //     view.setLblHarga(view.getTableItem().getValueAt(row, 3).toString());
+                    // }
+                }
+            }catch (SQLException ex) {
+                msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
+            }
+        }
+    }
     public void loadItem() {
         try {
             DefaultTableModel tbl = (DefaultTableModel) view.getTableItem().getModel();
@@ -66,12 +107,14 @@ public class OrderController implements ActionListener, BaseController{
                     if (currentData instanceof Food) {
                         Food f = (Food) currentData;
                         tbl.insertRow(tbl.getRowCount(), new Object[]{
+                            f.getItem_Id(),
                             f.getJenis(),
                             f.getName(),
                             f.getPrice(),});
                     } else if (currentData instanceof Beverage) {
                         Beverage Bf = (Beverage) currentData;
                         tbl.insertRow(tbl.getRowCount(), new Object[]{
+                            Bf.getItem_Id(),
                             Bf.getJenis(),
                             Bf.getName(),
                             Bf.getPrice(),});
