@@ -38,6 +38,8 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
         this.loadProduk();
         view.getTableProduk().setAutoCreateRowSorter(true);
         view.addMouseAdapter(this);
+        view.getbtnUpdate().setEnabled(false);
+        view.getbtnDelete().setEnabled(false);
     }
 
     @Override
@@ -51,10 +53,8 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
         } else if (source.equals(view.getbtnTambah())) {
             doTambahDanUpdate();
         } else if (source.equals(view.getbtnDelete())) {
-            doDelete();
+            doDelete();            
         } else if (source.equals(view.getbtnReset())) {
-            // new ItemController();
-            this.loadProduk();
             view.ResetForm();
         }
     }
@@ -86,6 +86,8 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                         }
                         view.setTxtNama(f.getName());
                         view.getTxtNama().setEnabled(false);
+                        view.getbtnUpdate().setEnabled(true);
+                        view.getbtnDelete().setEnabled(true);
                         view.setTxtHarga(String.valueOf(f.getPrice()));
                         view.setTxtVoW(Integer.toString(f.getWeight()));
                     }else if(it instanceof Beverage){
@@ -97,6 +99,8 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                         }
                         view.setTxtNama(Bf.getName());
                         view.getTxtNama().setEnabled(false);
+                        view.getbtnUpdate().setEnabled(true);
+                        view.getbtnDelete().setEnabled(true);
                         view.setTxtHarga(String.valueOf(Bf.getPrice()));
                         view.setTxtVoW(Integer.toString(Bf.getVolume()));
                     }
@@ -145,6 +149,9 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
     }
 
     public void doTambahDanUpdate() {
+        // if (view.getTxtNama().equals("") || view.getTxtHarga().equals("")||view.getTxtVoW().equals("")) {
+        //     msg.showMessage("Data tidak boleh kosong", "Validasi error", 2);
+        // }
         String jenis = "";
         if (view.getBtnMakanan().isSelected()) {
             jenis = "Makanan";
@@ -152,66 +159,61 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
             jenis = "Minuman";
         }
         String name = view.getTxtNama().getText();
-        String hargaTxt = view.getTxtHarga().getText();
-        double harga = Double.parseDouble(hargaTxt);
-        String VoWTxt = view.getTxtVoW().getText();
-        int VoW = Integer.parseInt(VoWTxt);
+        String hargaTxt=view.getTxtHarga().getText();
+        String VoWTxt= view.getTxtVoW().getText();
         if (jenis.isEmpty() || name.isEmpty() || hargaTxt.isEmpty() || VoWTxt.isEmpty()) {
             msg.showMessage("Data tidak boleh kosong", "Validasi error", 2);
-        } else {
-            boolean found = false;
-            try {
-                ArrayList<Item> data = this.cashier.getAllItem();
-                // Food f = null;
-                // Beverage Bf = null;
-                for (int i = 0; i < data.size() && !found; i++) {
-                    Item currentData = data.get(i);
-                    if (currentData instanceof Food && name.equals(currentData.getName())) {
-                        Food f = (Food) currentData;
-                        f.setItem_Id(currentData.getItem_Id());
-                        f.setName(name);
-                        f.setPrice(harga);
-                        f.setJenis(jenis);
-                        f.setWeight(VoW);
-                        found = true;
-                        cashier.editItem(f);
-                    } else if (currentData instanceof Beverage && name.equals(currentData.getName())) {
-                        Beverage Bf = (Beverage) currentData;
-                        Bf.setItem_Id(currentData.getItem_Id());
-                        Bf.setName(name);
-                        Bf.setPrice(harga);
-                        Bf.setJenis(jenis);
-                        Bf.setVolume(VoW);
-                        found = true;
-                        cashier.editItem(Bf);
+        }else{
+            double harga=0;
+            int VoW=0;
+            if(isNumber(hargaTxt)|| isNumber(VoWTxt)){
+                harga = Double.parseDouble(hargaTxt);
+                VoW = Integer.parseInt(VoWTxt);
+                boolean found = false;
+                try {
+                    ArrayList<Item> data = this.cashier.getAllItem();
+                    // Food f = null;
+                    // Beverage Bf = null;
+                    for (int i = 0; i < data.size() && !found; i++) {
+                        Item currentData = data.get(i);
+                        if (currentData instanceof Food && name.equals(currentData.getName())) {
+                            Food f = (Food) currentData;
+                            f.setItem_Id(currentData.getItem_Id());
+                            f.setName(name);
+                            f.setPrice(harga);
+                            f.setJenis(jenis);
+                            f.setWeight(VoW);
+                            found = true;
+                            cashier.editItem(f);
+                        } else if (currentData instanceof Beverage && name.equals(currentData.getName())) {
+                            Beverage Bf = (Beverage) currentData;
+                            Bf.setItem_Id(currentData.getItem_Id());
+                            Bf.setName(name);
+                            Bf.setPrice(harga);
+                            Bf.setJenis(jenis);
+                            Bf.setVolume(VoW);
+                            found = true;
+                            cashier.editItem(Bf);
+                        }
                     }
-                }
-                if (!found) {
-                    if (jenis.equals("Makanan")) {
-                        Food f = new Food(name, harga, jenis, VoW);
-                        cashier.addItem(f);
-                    } else if (jenis.equals("Minuman")) {
-                        Beverage Bf = new Beverage(name, harga, jenis, VoW);
-                        cashier.addItem(Bf);
+                    if (!found) {
+                        if (jenis.equals("Makanan")) {
+                            Food f = new Food(name, harga, jenis, VoW);
+                            cashier.addItem(f);
+                        } else if (jenis.equals("Minuman")) {
+                            Beverage Bf = new Beverage(name, harga, jenis, VoW);
+                            cashier.addItem(Bf);
+                        }
+                        msg.showMessage("Input data berhasil", "Success", 1);
                     }
-                    msg.showMessage("Input data berhasil", "Success", 1);
+                    loadProduk();
+                } catch (SQLException ex) {
+                    msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
                 }
-                //      if(f.getJenis().equals("Makanan")){
-                //         Item fi = (Food) f;
-                //         this.cashier.editItem(fi);
-                //      }else if(Bf.getJenis().equals("Makanan")){
-                //         Item fi = (Beverage) 
-                //         this.cashier.editItem(new Item(name, harga,jenis), VoW);
-                //      }
-
-                //      msg.showMessage("Data berhasil diupdate", "Success", 1);
-                //      this.loadProduk();
-                //  }
-                this.loadProduk();
-            } catch (SQLException ex) {
-                msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
+            }else{
+                msg.showMessage("Harga, Volume atau Berat Harus Dalam bentuk angka", "Validasi error", 2);
             }
-        }
+        } 
     }
     public void doDelete(){
         try{
@@ -228,9 +230,18 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                     msg.showMessage("Data berhasil dihapus", "Success", 1);
                 }
             }
-            loadProduk();
+            // loadProduk();
+            new ItemController();
+            view.dispose();
         }catch (SQLException ex){
             msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
         }
     }
+    public boolean isNumber(String s){
+        for (int i = 0; i < s.length(); i++)
+        if (Character.isDigit(s.charAt(i)) == false)
+            return false;
+
+        return true;
+    } 
 }

@@ -110,7 +110,7 @@ public class Cashier implements CashierInterface{
     public void editItem(Food f) throws SQLException {
         db.connectDB();
         String sql = "UPDATE item SET Item_price = "+f.getPrice()+", item_jenis = '"+f.getJenis()+
-                    "',volume_or_weight = "+f.getWeight()+" WHERE item.item_name = '"+f.getName()+"'";
+                    "',volume_or_weight = "+f.getWeight()+" WHERE item_name = '"+f.getName()+"'";
         db.executeUpdate(sql);
         db.disconnectDB();
     }
@@ -118,7 +118,7 @@ public class Cashier implements CashierInterface{
     public void editItem(Beverage Bf) throws SQLException {
         db.connectDB();
         String sql = "UPDATE item SET Item_price = "+Bf.getPrice()+", item_jenis = '"+Bf.getJenis()+
-                    "',volume_or_weight = "+Bf.getVolume()+" WHERE item.item_name = '"+Bf.getName()+"'";
+                    "',volume_or_weight = "+Bf.getVolume()+" WHERE item_name = '"+Bf.getName()+"'";
         db.executeUpdate(sql);
         db.disconnectDB();
     }
