@@ -26,7 +26,7 @@ public class Order_View extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     public JTable getTableItem(){
-        return tblItem;
+        return tabelItem;
     }
     public JTable getTableKeranjang(){
         return tabelkeranjang;
@@ -87,7 +87,7 @@ public class Order_View extends javax.swing.JFrame {
     }
     public void addMouseAdapter(MouseAdapter e) {
         tabelkeranjang.addMouseListener(e);
-        tblItem.addMouseListener(e);
+        tabelItem.addMouseListener(e);
     }  
     
     /**
@@ -101,7 +101,7 @@ public class Order_View extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblItem = new javax.swing.JTable();
+        tabelItem = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -130,7 +130,7 @@ public class Order_View extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Order");
 
-        tblItem.setModel(new javax.swing.table.DefaultTableModel(
+        tabelItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -153,12 +153,12 @@ public class Order_View extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblItem.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelItem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblItemMouseClicked(evt);
+                tabelItemMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tblItem);
+        jScrollPane3.setViewportView(tabelItem);
 
         jLabel2.setText("Item");
 
@@ -166,25 +166,26 @@ public class Order_View extends javax.swing.JFrame {
 
         jLabel6.setText("Nama");
 
-        txtItem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtItem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtItem.setText(" ");
         txtItem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel7.setText("Harga");
 
-        txtharga.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtharga.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtharga.setText(" ");
         txtharga.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel5.setText("Kuantitas");
 
-        txtkuantitas.setText("1");
+        txtkuantitas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtkuantitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtkuantitasActionPerformed(evt);
             }
         });
 
+        txtJenis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtJenis.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnTambahOrder.setText("Tambah Order");
@@ -231,7 +232,7 @@ public class Order_View extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tabelkeranjang);
 
-        jLabel4.setText("Isi Orderan");
+        jLabel4.setText("Item Orderan");
 
         jLabel8.setFont(new java.awt.Font("Retroica", 0, 18)); // NOI18N
         jLabel8.setText("Total Bayar");
@@ -257,7 +258,7 @@ public class Order_View extends javax.swing.JFrame {
 
         jLabel9.setText("No Meja");
 
-        txtNoMeja.setText("1");
+        txtNoMeja.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNoMeja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNoMejaActionPerformed(evt);
@@ -266,7 +267,7 @@ public class Order_View extends javax.swing.JFrame {
 
         jLabel10.setText("Item ID");
 
-        txtItemId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtItemId.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtItemId.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,35 +278,38 @@ public class Order_View extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(330, 330, 330)
-                        .addComponent(btnbayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(289, 289, 289)
+                        .addComponent(jLabel1)
+                        .addGap(0, 319, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtkuantitas, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtkuantitas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel7))
-                                .addGap(33, 33, 33)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel10))
+                                .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtItem, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtJenis, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtItemId, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtharga, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtItemId, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtItem, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                        .addComponent(txtharga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtJenis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtNoMeja, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel10))
+                            .addComponent(btnTambahOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnhapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -313,18 +317,10 @@ public class Order_View extends javax.swing.JFrame {
                                         .addGap(47, 47, 47)
                                         .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel4))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnTambahOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnkembali, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(289, 289, 289)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 24, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnkembali, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnbayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -332,11 +328,13 @@ public class Order_View extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1)
+                        .addGap(8, 8, 8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnkembali)
@@ -350,17 +348,18 @@ public class Order_View extends javax.swing.JFrame {
                             .addComponent(txttotal)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtNoMeja, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNoMeja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 6, Short.MAX_VALUE)
+                .addGap(0, 2, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 13, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(txtItemId, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -390,9 +389,9 @@ public class Order_View extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblItemMouseClicked
+    private void tabelItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelItemMouseClicked
 
-    }//GEN-LAST:event_tblItemMouseClicked
+    }//GEN-LAST:event_tabelItemMouseClicked
 
     private void txtkuantitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtkuantitasActionPerformed
         // TODO add your handling code here:
@@ -477,8 +476,8 @@ public class Order_View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable tabelItem;
     private javax.swing.JTable tabelkeranjang;
-    private javax.swing.JTable tblItem;
     private javax.swing.JLabel txtItem;
     private javax.swing.JLabel txtItemId;
     private javax.swing.JLabel txtJenis;

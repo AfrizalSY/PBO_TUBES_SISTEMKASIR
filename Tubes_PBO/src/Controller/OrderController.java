@@ -31,15 +31,20 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
         view.setVisible(true);
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.loadItem();
+        view.getBtnBayar().setEnabled(false);
+        view.getBtnHapus().setEnabled(false);
+        view.getBtnTambahOrder().setEnabled(false);
         view.getTableItem().setAutoCreateRowSorter(true);
         view.getTableKeranjang().setAutoCreateRowSorter(true);
         view.addActionListener(this);
+        view.addMouseAdapter(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         Object source = ae.getSource();
         if (source.equals(view.getBtnTambahOrder())) {
+            doTambahKeKeranjang();
         } else if (source.equals(view.getBtnBayar())) {
             new BayarController();
             // view.dispose();
@@ -66,24 +71,25 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
                     }
                 }
                 if(index != -1){
-                    view.setItemId(view.getTableItem().getValueAt(row, 0).toString());
-                    view.setLblJenis(view.getTableItem().getValueAt(row, 1).toString());
-                    view.setLblItem(view.getTableItem().getValueAt(row, 2).toString());
-                    view.setLblHarga(view.getTableItem().getValueAt(row, 3).toString());
-                    // Item it = data.get(index);
-                    // if(it instanceof Food){
-                    //     Food f = (Food) it;
-                    //     view.setItemId(view.getTableItem().getValueAt(row, 0).toString());
-                    //     view.setLblItem(view.getTableItem().getValueAt(row, 1).toString());
-                    //     view.setLblJenis(view.getTableItem().getValueAt(row, 2).toString());
-                    //     view.setLblHarga(view.getTableItem().getValueAt(row, 3).toString());
-                    // }else if(it instanceof Beverage){
-                    //     Beverage Bf = (Beverage) it;
-                    //     view.setItemId(view.getTableItem().getValueAt(row, 0).toString());
-                    //     view.setLblItem(view.getTableItem().getValueAt(row, 1).toString());
-                    //     view.setLblJenis(view.getTableItem().getValueAt(row, 2).toString());
-                    //     view.setLblHarga(view.getTableItem().getValueAt(row, 3).toString());
-                    // }
+                    // view.setItemId(view.getTableItem().getValueAt(row, 0).toString());
+                    // view.setLblJenis(view.getTableItem().getValueAt(row, 1).toString());
+                    // view.setLblItem(view.getTableItem().getValueAt(row, 2).toString());
+                    // view.setLblHarga(view.getTableItem().getValueAt(row, 3).toString());
+                    view.getBtnTambahOrder().setEnabled(true);
+                    Item it = data.get(index);
+                    if(it instanceof Food){
+                        Food f = (Food) it;
+                        view.setItemId(Integer.toString(f.getItem_Id()));
+                        view.setLblItem(f.getName());
+                        view.setLblJenis(f.getJenis());
+                        view.setLblHarga(String.valueOf(f.getPrice()));
+                    }else if(it instanceof Beverage){
+                        Beverage Bf = (Beverage) it;
+                        view.setItemId(Integer.toString(Bf.getItem_Id()));
+                        view.setLblItem(Bf.getName());
+                        view.setLblJenis(Bf.getJenis());
+                        view.setLblHarga(String.valueOf(Bf.getPrice()));
+                    }
                 }
             }catch (SQLException ex) {
                 msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
@@ -98,12 +104,6 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
             if (!data.isEmpty()) {
                 for (int i = 0; i < data.size(); i++) {
                     Item currentData = data.get(i);
-                    // tbl.insertRow(tbl.getRowCount(),new Object[]{
-                    //     f.getItem_Id(),
-                    //     f.getName(),
-                    //     f.getPrice(),
-                    //     f.getJenis(),
-                    //     f.getWeight(),});
                     if (currentData instanceof Food) {
                         Food f = (Food) currentData;
                         tbl.insertRow(tbl.getRowCount(), new Object[]{
@@ -123,6 +123,17 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
             }
         } catch (SQLException ex) {
             msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
+        }
+    }
+    public void doTambahKeKeranjang(){
+        String txtNoMeja = view.getTxtFieldNoMeja().getText();
+        String txtKuantitas = view.getTxtFieldKuantitas().getText();
+        if(txtNoMeja.isEmpty()|| txtKuantitas.isEmpty()) {
+            msg.showMessage("No Meja dan Jumlah Kuantitas Tidak Boleh Kosong", "Validasi error", 2);
+        }else{
+            int noMeja = Integer.parseInt(txtNoMeja);
+            int kuantitas = Integer.parseInt(txtKuantitas);
+            
         }
     }
 }
