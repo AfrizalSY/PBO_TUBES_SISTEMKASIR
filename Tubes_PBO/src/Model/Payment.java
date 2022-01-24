@@ -11,14 +11,24 @@ package Model;
  */
 public abstract class Payment {
     private double amount;
-    private Order order;
+    private String jenis_bayar;
 
-    public Payment(float amount, Order order) {
+    public Payment(Double amount) {
         this.amount = amount;
-        this.order = order;
+    }
+    public void setJenisBayar(String jenis_bayar) {
+        this.jenis_bayar = jenis_bayar;
+    }
+    public String getJenisBayar(){
+        return this.jenis_bayar;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+    public double getAmount() {
+        return amount;
     }
     public double calculateTotalPrice(){
-        this.amount = this.order.getTotalPrice();
         return this.amount;
     }
     public abstract void info();

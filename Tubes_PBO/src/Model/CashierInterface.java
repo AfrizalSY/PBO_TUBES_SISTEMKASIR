@@ -25,5 +25,5 @@ public interface CashierInterface {
 
     public void deleteItem(int idx) throws SQLException;
 
-    public void deleteItem(Item n, Order o);
+    public void deleteItem(int itemId, int orderId) throws SQLException;
 }

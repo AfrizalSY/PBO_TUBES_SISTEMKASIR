@@ -9,14 +9,15 @@ package Model;
  *
  * @author WIBU
  */
-public class Cash extends Payment implements Tax{
+public class Cash extends Payment implements Tax {
+
     private double cash;
 
-    public Cash(float amount, Order order,double cash) {
-        super(amount, order);
+    public Cash(Double amount, double cash) {
+        super(amount);
         this.cash = cash;
     }
-    
+
     public double getCash() {
         return cash;
     }
@@ -24,15 +25,16 @@ public class Cash extends Payment implements Tax{
     public void setCash(double cash) {
         this.cash = cash;
     }
-    
+
     @Override
-    public double includeTax(){
+    public double includeTax() {
         double total = 0;
-        total = calculateTotalPrice()+(calculateTotalPrice() * (10/100));
+        total = calculateTotalPrice() + (calculateTotalPrice() * (10 / 100));
         return total;
     }
+
     @Override
-    public void info(){
-        
+    public void info() {
+
     }
 }

@@ -19,10 +19,6 @@ public class CashierController {
         this.cashier = new Cashier("akbul", "vinzmetal", "password");
     }
 
-    public Order createNewOrder(int tableNo) {
-        return this.cashier.createOrder(tableNo);
-    }
-
     public void addItem(Item item, int qty, Order order) {
         this.cashier.addItem(item, qty, order);
     }

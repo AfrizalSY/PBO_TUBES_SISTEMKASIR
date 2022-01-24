@@ -25,34 +25,48 @@ public class Bayar extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    public JButton getBtnKembali(){
+
+    public JButton getBtnKembali() {
         return btnKembali;
     }
-    public JButton getBtnBayar(){
+
+    public JButton getBtnBayar() {
         return btnBayar;
     }
-    public JLabel getKembalian(){
+
+    public JLabel getKembalian() {
         return txtKembalian;
     }
-    public JLabel getTotal(){
+
+    public JLabel getTotal() {
         return txtTotal;
     }
-    public JComboBox getCmbNamaBank(){
+
+    public JComboBox getCmbNamaBank() {
         return cmbBoxNamaBank;
     }
-    public JTextField getTxtFieldBayar(){
+
+    public JTextField getTxtFieldBayar() {
         return textFieldBayar;
     }
-    public JRadioButton getMthdCash(){
+
+    public JRadioButton getMthdCash() {
         return cbCash;
     }
-    public JRadioButton getMthdBank(){
+
+    public JRadioButton getMthdBank() {
         return cbBank;
     }
+
+    public JLabel getLblTotalWTax() {
+        return lblTotalWTax;
+    }
+
     public void addActionListener(ActionListener e) {
         btnBayar.addActionListener(e);
         btnKembali.addActionListener(e);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,6 +91,8 @@ public class Bayar extends javax.swing.JFrame {
         btnBayar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtKembalian = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblTotalWTax = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,7 +100,7 @@ public class Bayar extends javax.swing.JFrame {
 
         jLabel1.setText("Pembayaran");
 
-        jLabel2.setText("Pembayaran");
+        jLabel2.setText("Total Belanja");
 
         txtTotal.setText("0");
 
@@ -103,13 +119,18 @@ public class Bayar extends javax.swing.JFrame {
 
         jLabel5.setText("Nama Bank");
 
-        cmbBoxNamaBank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbBoxNamaBank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BNI", "Mandiri" }));
 
         jLabel6.setText("Bayar");
 
         textFieldBayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldBayarActionPerformed(evt);
+            }
+        });
+        textFieldBayar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textFieldBayarKeyReleased(evt);
             }
         });
 
@@ -124,43 +145,52 @@ public class Bayar extends javax.swing.JFrame {
 
         txtKembalian.setText("0");
 
+        jLabel7.setText("Total Baya ( Dengan Pajak )");
+
+        lblTotalWTax.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(96, 96, 96)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnKembali)
-                        .addGap(83, 83, 83)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbCash)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbBank)
+                        .addGap(63, 63, 63))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel6))
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbCash)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbBank))
-                                    .addComponent(cmbBoxNamaBank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(txtTotal))
-                                    .addComponent(textFieldBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel2)
+                                .addGap(107, 107, 107)
+                                .addComponent(txtTotal))
                             .addComponent(btnBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(47, 47, 47)
-                                .addComponent(txtKembalian)))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                                .addComponent(txtKembalian))
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(119, 119, 119)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbBoxNamaBank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textFieldBayar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTotalWTax))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnKembali)
+                .addGap(83, 83, 83)
+                .addComponent(jLabel1)
+                .addContainerGap(199, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,6 +208,10 @@ public class Bayar extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(cbCash)
                     .addComponent(cbBank))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblTotalWTax))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -192,7 +226,7 @@ public class Bayar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtKembalian))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
@@ -209,6 +243,12 @@ public class Bayar extends javax.swing.JFrame {
     private void textFieldBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBayarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldBayarActionPerformed
+
+    private void textFieldBayarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldBayarKeyReleased
+        Double bayar = Double.parseDouble(this.textFieldBayar.getText());
+        Double kembalian = bayar - Double.parseDouble(this.lblTotalWTax.getText());
+        this.txtKembalian.setText(String.valueOf(kembalian));
+    }//GEN-LAST:event_textFieldBayarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -258,6 +298,8 @@ public class Bayar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblTotalWTax;
     private javax.swing.JTextField textFieldBayar;
     private javax.swing.JLabel txtKembalian;
     private javax.swing.JLabel txtTotal;

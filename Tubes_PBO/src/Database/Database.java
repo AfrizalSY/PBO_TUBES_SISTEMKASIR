@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package Database;
+
 import java.sql.*;
+
 /**
  *
  * @author WIBU
@@ -18,35 +20,45 @@ public class Database {
     static Statement stmt = null;
     static ResultSet rs = null;
 
-    public void connectDB(){
-        try{
+    public void connectDB() {
+        try {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
             stmt = conn.createStatement();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     // Select
-    public void executeQuery(String query) throws SQLException{
+    public void executeQuery(String query) throws SQLException {
         this.rs = stmt.executeQuery(query);
     }
 
     // Insert
-    public void execute(String query) throws SQLException{
+    public void execute(String query) throws SQLException {
         stmt.execute(query);
     }
+
     //, Update, delete
-    public void executeUpdate(String query) throws SQLException{
+    public void executeUpdate(String query) throws SQLException {
         stmt.executeUpdate(query);
     }
 
+    public int executeInsert(String query) throws SQLException {
+        stmt = conn.createStatement();
+        stmt.executeUpdate(query,Statement.RETURN_GENERATED_KEYS);
+        rs = stmt.getGeneratedKeys();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        return -1;
+    }
 
-    public ResultSet getRs(){
+    public ResultSet getRs() {
         return this.rs;
     }
 
-    public void disconnectDB() throws SQLException{
+    public void disconnectDB() throws SQLException {
         this.conn.close();
     }
 }

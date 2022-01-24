@@ -12,12 +12,16 @@ package Model;
 public class Bank extends Payment implements Tax{
     
     private String bankName;
-    private String bankID;
-  public Bank(float amount, Order order,String bankName, String bankID) {
-        super(amount, order);
+
+    public Bank(Double amount) {
+        super(amount);
+    }  
+
+    public Bank(String bankName, String bankID, Double amount) {
+        super(amount);
         this.bankName = bankName;
-        this.bankID = bankID;
     }
+
   
     public String getBankName() {
         return bankName;
@@ -26,19 +30,11 @@ public class Bank extends Payment implements Tax{
     public void setBankName(String bankName) {
         this.bankName = bankName;
     }
-
-    public String getBankID() {
-        return bankID;
-    }
-
-    public void setBankID(String bankID) {
-        this.bankID = bankID;
-    }
     
     @Override
     public double includeTax(){
         double total = 0;
-        total = calculateTotalPrice()+(calculateTotalPrice() * (10/100));
+        total = calculateTotalPrice()+(calculateTotalPrice() * 10/100);
         return total;
     }
     @Override
