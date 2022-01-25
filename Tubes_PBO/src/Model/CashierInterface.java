@@ -17,8 +17,6 @@ public interface CashierInterface {
 
     public void addItem(Beverage Bf)throws SQLException;
 
-    public void addItem(Item n, int qty, Order o);
-
     public void editItem(Food f) throws SQLException;
 
     public void editItem(Beverage Bf) throws SQLException;

@@ -110,10 +110,7 @@ public class Cashier implements CashierInterface {
         db.disconnectDB();
     }
 
-    @Override
-    public void addItem(Item n, int qty, Order o) {
-        // o.addOrderItem(n, qty);
-    }
+
 
     @Override
     public void editItem(Food f) throws SQLException {
