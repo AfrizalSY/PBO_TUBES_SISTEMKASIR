@@ -25,71 +25,99 @@ public class Order_View extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    public JTable getTableItem(){
+
+    public JTable getTableItem() {
         return tabelItem;
     }
-    public JTable getTableKeranjang(){
+
+    public JTable getTableKeranjang() {
         return tabelkeranjang;
     }
-    public JButton getBtnTambahOrder(){
+
+    public JButton getBtnTambahOrder() {
         return btnTambahOrder;
     }
-    public JButton getBtnBayar(){
+
+    public JButton getBtnBayar() {
         return btnbayar;
     }
-    public JButton getBtnHapus(){
+
+    public JButton getBtnHapus() {
         return btnhapus;
     }
-    public JButton getBtnKembali(){
+
+    public JButton getBtnKembali() {
         return btnkembali;
     }
-    public JTextField getTxtFieldNoMeja(){
+
+    public JTextField getTxtFieldNoMeja() {
         return txtNoMeja;
     }
-    public JTextField getTxtFieldKuantitas(){
+
+    public JTextField getTxtFieldKuantitas() {
         return txtkuantitas;
     }
-    public JLabel getItemId(){
+
+    public JLabel getItemId() {
         return txtItemId;
     }
-    public JLabel getLblItem(){
+
+    public JLabel getLblItem() {
         return txtItem;
     }
-    public JLabel getLblJenis(){
+
+    public JLabel getLblJenis() {
         return txtJenis;
     }
-    public JLabel getLblHarga(){
+
+    public JLabel getLblHarga() {
         return txtharga;
     }
-    public JLabel getLblTotal(){
+
+    public JLabel getLblTotal() {
         return txttotal;
     }
-    public void setItemId(String v){
+
+    public void setItemId(String v) {
         this.txtItemId.setText(v);
     }
-    public void setLblItem(String v){
+
+    public void setLblItem(String v) {
         this.txtItem.setText(v);
     }
-    public void setLblJenis(String v){
+
+    public void setLblJenis(String v) {
         this.txtJenis.setText(v);
     }
-    public void setLblHarga(String v){
+
+    public void setLblHarga(String v) {
         this.txtharga.setText(v);
     }
-    public void setLblTotal(String v){
+
+    public void setLblTotal(String v) {
         this.txttotal.setText(v);
     }
+
     public void addActionListener(ActionListener e) {
         btnTambahOrder.addActionListener(e);
         btnbayar.addActionListener(e);
         btnhapus.addActionListener(e);
         btnkembali.addActionListener(e);
     }
+
     public void addMouseAdapter(MouseAdapter e) {
         tabelkeranjang.addMouseListener(e);
         tabelItem.addMouseListener(e);
-    }  
-    
+    }
+
+    public void ResetLabel() {
+        txtItemId.setText("");
+        txtJenis.setText("");
+        txtItem .setText("");
+        txtharga.setText("");
+        txtkuantitas.setText("");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

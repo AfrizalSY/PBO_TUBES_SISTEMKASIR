@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import javax.swing.JFrame;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 
@@ -28,7 +29,7 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
 
     private Item_View view;
     private Cashier cashier = new Cashier();
-
+    ArrayList<Item> item;
     public ItemController() {
         view = new Item_View();
         view.setTitle("Item Produk");
@@ -62,21 +63,21 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
     @Override
     public void mousePressed(MouseEvent me) {
         Object source = me.getSource();
-        if(source.equals(view.getTableProduk())&& me.getClickCount()==2){
+        if(source.equals(view.getTableProduk())&& me.getClickCount()==1){
             try{
                 JTable target = (JTable) me.getSource();
                 int row = target.getSelectedRow();
                 String nama = (String) view.getTableProduk().getValueAt(row, 1);
                 int index = -1;
-                ArrayList<Item> data = this.cashier.getAllItem();
-                for(int i = 0; i < data.size() && index ==-1; i++){
-                    Item currentData = data.get(i);
+                item = this.cashier.getAllItem();
+                for(int i = 0; i < item.size() && index ==-1; i++){
+                    Item currentData = item.get(i);
                     if(nama.equals(currentData.getName())){
                         index = i;
                     }
                 }
                 if(index != -1){
-                    Item it = data.get(index);
+                    Item it = item.get(index);
                     if(it instanceof Food){
                         Food f = (Food) it;
                         if(f.getJenis().equals("Makanan")){
@@ -114,16 +115,10 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
         try {
             DefaultTableModel tbl = (DefaultTableModel) view.getTableProduk().getModel();
             tbl.setRowCount(0);
-            ArrayList<Item> data = cashier.getAllItem();
-            if (!data.isEmpty()) {
-                for (int i = 0; i < data.size(); i++) {
-                    Item currentData = data.get(i);
-                    // tbl.insertRow(tbl.getRowCount(),new Object[]{
-                    //     f.getItem_Id(),
-                    //     f.getName(),
-                    //     f.getPrice(),
-                    //     f.getJenis(),
-                    //     f.getWeight(),});
+            item = cashier.getAllItem();
+//            if (!item.isEmpty()) {
+                for (int i = 0; i < item.size(); i++) {
+                    Item currentData = item.get(i);
                     if (currentData instanceof Food) {
                         Food f = (Food) currentData;
                         tbl.insertRow(tbl.getRowCount(), new Object[]{
@@ -142,7 +137,7 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                             Bf.getVolume(),});
                     }
                 }
-            }
+//            }
         } catch (SQLException ex) {
             msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
         }
@@ -171,11 +166,11 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                 VoW = Integer.parseInt(VoWTxt);
                 boolean found = false;
                 try {
-                    ArrayList<Item> data = this.cashier.getAllItem();
+                    item = this.cashier.getAllItem();
                     // Food f = null;
                     // Beverage Bf = null;
-                    for (int i = 0; i < data.size() && !found; i++) {
-                        Item currentData = data.get(i);
+                    for (int i = 0; i < item.size() && !found; i++) {
+                        Item currentData = item.get(i);
                         if (currentData instanceof Food && name.equals(currentData.getName())) {
                             Food f = (Food) currentData;
                             f.setItem_Id(currentData.getItem_Id());
@@ -209,6 +204,7 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
                         msg.showMessage("Input data berhasil", "Success", 1);
                     }
                     loadProduk();
+                    view.ResetForm();
                 } catch (SQLException ex) {
                     msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
                 }
@@ -220,19 +216,25 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
     public void doDelete(){
         try{
             // DefaultTableModel tbl = (DefaultTableModel) view.getTableProduk().getModel();
-            ArrayList<Item> data = cashier.getAllItem();
+            item = cashier.getAllItem();
             int row = view.getTableProduk().getSelectedRow();
             int num_id = (int) view.getTableProduk().getValueAt(row,0);
             int idx = -1;
-            for(int i =0; i<data.size() && idx == -1;i++){
-                Item currentData = data.get(i);
+            for(int i =0; i<item.size() && idx == -1;i++){
+                Item currentData = item.get(i);
                 if(num_id==currentData.getItem_Id()){
+                    String message = "Apakah Anda Yakin Menghapus Item Dengan Nama: "+currentData.getName();
+                    Object[] options ={"Yes", "Cancel"};
+                    int option = JOptionPane.showOptionDialog(null, message, "",JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
                     idx = i;
-                    cashier.deleteItem(num_id);
-                    msg.showMessage("Data berhasil dihapus", "Success", 1);
+                    if(option == JOptionPane.OK_OPTION){  
+                        cashier.deleteItem(num_id);
+                        msg.showMessage("Data berhasil dihapus", "Success", 1);
+                    }
                 }
             }
             view.ResetForm();
+            loadProduk();
         }catch (SQLException ex){
             msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
         }

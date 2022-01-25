@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2022 at 04:00 PM
+-- Generation Time: Jan 25, 2022 at 08:54 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -41,7 +41,9 @@ CREATE TABLE `item` (
 
 INSERT INTO `item` (`item_id`, `item_name`, `item_price`, `item_jenis`, `volume_or_weight`) VALUES
 (1, 'Nasi Goreng', 15000, 'Makanan', 140),
-(2, 'Es Teh', 3000, 'Minuman', 500);
+(2, 'Es Teh', 3000, 'Minuman', 500),
+(3, 'Mie Goreng', 13000, 'Makanan', 150),
+(4, 'Es Jeruk', 4000, 'Minuman', 400);
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,8 @@ CREATE TABLE `kasir` (
 --
 
 INSERT INTO `kasir` (`id`, `name`, `username`, `password`) VALUES
-(1, 'Afrizal', 'asy123', 'asy123');
+(1, 'Afrizal', 'asy123', 'asy123'),
+(2, 'admin', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -82,34 +85,12 @@ CREATE TABLE `keranjang` (
 --
 
 INSERT INTO `keranjang` (`keranjang_id`, `order_id`, `id_item`, `jumlah_item`, `harga_item_perjumlah`) VALUES
-(1, 1, 1, 1, 0),
-(2, 1, 2, 1, 0),
-(3, 8, 1, 1, 15000),
-(4, 9, 2, 1, 3000),
-(5, 9, 1, 1, 15000),
-(6, 10, 1, 2, 30000),
-(7, 11, 1, 2, 30000),
-(8, 12, 2, 2, 6000),
-(9, 13, 1, 2, 30000),
-(10, 13, 2, 2, 6000),
-(11, 14, 2, 1, 3000),
-(12, 14, 2, 1, 3000),
-(13, 15, 2, 2, 6000),
-(15, 16, 2, 2, 6000),
-(19, 19, 2, 1, 3000),
-(20, 20, 1, 1, 15000),
-(21, 21, 1, 2, 30000),
-(23, 22, 1, 1, 15000),
-(24, 23, 1, 1, 15000),
-(25, 24, 1, 1, 15000),
-(26, 25, 1, 1, 15000),
-(27, 26, 1, 1, 15000),
-(28, 27, 1, 1, 15000),
-(29, 28, 1, 1, 15000),
-(30, 29, 1, 1, 15000),
-(31, 30, 1, 1, 15000),
-(32, 31, 1, 1, 15000),
-(33, 32, 1, 1, 15000);
+(1, 1, 1, 1, 15000),
+(2, 1, 2, 2, 6000),
+(3, 1, 3, 1, 13000),
+(4, 2, 3, 2, 26000),
+(5, 2, 4, 3, 12000),
+(6, 2, 1, 1, 15000);
 
 -- --------------------------------------------------------
 
@@ -132,38 +113,8 @@ CREATE TABLE `order_table` (
 --
 
 INSERT INTO `order_table` (`id_order`, `no_table`, `jenis_pembayaran`, `nama_bank`, `total_pembayaran`, `uang_yang_diberikan`, `uang_kembalian`) VALUES
-(1, 12, 'Cash', '', 18000, 20000, 2000),
-(2, 1, NULL, NULL, 20, NULL, NULL),
-(3, 1, NULL, NULL, NULL, NULL, NULL),
-(4, 1, NULL, NULL, NULL, NULL, NULL),
-(5, 1, NULL, NULL, NULL, NULL, NULL),
-(6, 1, NULL, NULL, NULL, NULL, NULL),
-(7, 1, NULL, NULL, NULL, NULL, NULL),
-(8, 1, NULL, NULL, NULL, NULL, NULL),
-(9, 2, NULL, NULL, NULL, NULL, NULL),
-(10, 1, NULL, NULL, NULL, NULL, NULL),
-(11, 1, NULL, NULL, NULL, NULL, NULL),
-(12, 2, NULL, NULL, NULL, NULL, NULL),
-(13, 1, NULL, NULL, NULL, NULL, NULL),
-(14, 1, NULL, NULL, NULL, NULL, NULL),
-(15, 1, NULL, NULL, NULL, NULL, NULL),
-(16, 1, NULL, NULL, NULL, NULL, NULL),
-(17, 1, NULL, NULL, NULL, NULL, NULL),
-(18, 1, NULL, NULL, NULL, NULL, NULL),
-(19, 1, NULL, NULL, NULL, NULL, NULL),
-(20, 1, NULL, NULL, NULL, NULL, NULL),
-(21, 1, NULL, NULL, 30000, NULL, NULL),
-(22, 1, NULL, NULL, 15000, NULL, NULL),
-(23, 1, NULL, NULL, 15000, NULL, NULL),
-(24, 1, NULL, NULL, 15000, NULL, NULL),
-(25, 1, NULL, NULL, 15000, NULL, NULL),
-(26, 1, NULL, NULL, 15000, NULL, NULL),
-(27, 1, NULL, NULL, 15000, NULL, NULL),
-(28, 1, NULL, NULL, 15000, NULL, NULL),
-(29, 1, NULL, NULL, 15000, NULL, NULL),
-(30, 1, 'bank', 'BNI', 16500, 20000, 3500),
-(31, 1, NULL, NULL, 15000, NULL, NULL),
-(32, 1, NULL, NULL, 15000, NULL, NULL);
+(1, 12, 'cash', '-', 37400, 50000, 12600),
+(2, 12, 'bank', 'Mandiri', 58300, 100000, 41700);
 
 --
 -- Indexes for dumped tables
@@ -202,25 +153,25 @@ ALTER TABLE `order_table`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kasir`
 --
 ALTER TABLE `kasir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `keranjang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `keranjang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

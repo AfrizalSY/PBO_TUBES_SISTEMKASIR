@@ -19,7 +19,6 @@ public class Cashier implements CashierInterface {
     private String username;
     private String password;
     private ArrayList<Order> listOrder;
-    private ArrayList<Payment> listPayment;
     private Database db = new Database();
 
     public Cashier(String name, String user, String pass) {
@@ -27,7 +26,6 @@ public class Cashier implements CashierInterface {
         this.username = user;
         this.password = pass;
         this.listOrder = new ArrayList<>();
-        this.listPayment = new ArrayList<>();
     }
 
     public Cashier(String user, String pass) {
@@ -155,17 +153,28 @@ public class Cashier implements CashierInterface {
         db.disconnectDB();
     }
 
-    public void showAllPayment(Payment p) {
-
-    }
-
-    public void showAllOrder() {
-
+    public ArrayList<Order> showAllOrder() throws SQLException {
+        db.connectDB();
+        listOrder = new ArrayList<>();
+        String sql = "SELECT * FROM order_table";
+        db.executeQuery(sql);
+        while (db.getRs().next()) {
+            int id = db.getRs().getInt("id_order");
+            int noTable = db.getRs().getInt("no_table");
+            String jenis_pembayaran = db.getRs().getString("jenis_pembayaran");
+            String nama_bank = db.getRs().getString("nama_bank");
+            double total_pembayaran = db.getRs().getDouble("total_pembayaran");
+            double uang_yang_diberikan = db.getRs().getDouble("uang_yang_diberikan");
+            double uang_kembalian = db.getRs().getDouble("uang_kembalian");
+            listOrder.add(new Order(id,noTable,jenis_pembayaran,nama_bank,total_pembayaran,uang_yang_diberikan,uang_kembalian));
+        }
+        db.disconnectDB();
+        return listOrder;
     }
 
     public void payWithCash(double totalPrice, double cash, double kembalian, int orderId) throws SQLException {
         db.connectDB();
-        String sql = "UPDATE order_table SET  jenis_pembayaran='cash', total_pembayaran='%s', uang_yang_diberikan = '%s', uang_kembalian = '%s' WHERE id_order = %d";
+        String sql = "UPDATE order_table SET  jenis_pembayaran='cash', total_pembayaran='%s', nama_bank = '-',uang_yang_diberikan = '%s', uang_kembalian = '%s' WHERE id_order = %d";
         sql = String.format(sql, totalPrice, cash, kembalian, orderId);
         db.executeUpdate(sql);
         db.disconnectDB();

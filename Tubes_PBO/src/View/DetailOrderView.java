@@ -5,6 +5,11 @@
  */
 package View;
 
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+
 /**
  *
  * @author WIBU
@@ -16,6 +21,75 @@ public class DetailOrderView extends javax.swing.JFrame {
      */
     public DetailOrderView() {
         initComponents();
+        this.setLocationRelativeTo(null);
+    }
+
+    public JLabel getLblOrderId() {
+        return txtOrderId;
+    }
+
+    public JLabel getLblNoMeja() {
+        return txtNoMeja;
+    }
+
+    public JLabel getLblJenisPembayaran() {
+        return txtJenisPembayaran;
+    }
+
+    public JLabel getLblNamaBank() {
+        return lblNamaBankOCash;
+    }
+
+    public JLabel getLblTotalPembayaran() {
+        return txtTotalPembayaran;
+    }
+
+    public JLabel getLblUangYgDiberikan() {
+        return TxtUangYangDiberikan;
+    }
+
+    public JLabel getLblKembalian() {
+        return txtKembalian;
+    }
+
+    public JTable getTblKeranjang() {
+        return tabelKeranjang;
+    }
+
+    public void setLblOrderId(String v) {
+        this.txtOrderId.setText(v);
+    }
+
+    public void setLblNoMeja(String v) {
+        this.txtNoMeja.setText(v);
+    }
+
+    public void setLblJenisPembayaran(String v) {
+        this.txtJenisPembayaran.setText(v);
+    }
+
+    public void setLblNamaBank(String v) {
+        this.lblNamaBankOCash.setText(v);
+    }
+
+    public void setLblTotalPembayaran(String v) {
+        this.txtTotalPembayaran.setText(v);
+    }
+
+    public void setLblUangYgDiberikan(String v) {
+        this.TxtUangYangDiberikan.setText(v);
+    }
+
+    public void setLblKembalian(String v) {
+        this.txtKembalian.setText(v);
+    }
+
+    public JButton getBtnKembali() {
+        return btnKembali;
+    }
+
+    public void addActionListener(ActionListener e) {
+        btnKembali.addActionListener(e);
     }
 
     /**
@@ -27,72 +101,201 @@ public class DetailOrderView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        orderItem1 = new Model.OrderItem();
         jLabel1 = new javax.swing.JLabel();
-        LblOrderId = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        LblNomorMeja = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        txtTotalPembayaran = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabelKeranjang = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        TxtUangYangDiberikan = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtKembalian = new javax.swing.JLabel();
+        txtOrderId = new javax.swing.JLabel();
+        txtNoMeja = new javax.swing.JLabel();
+        lblNamaBankOCash = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtJenisPembayaran = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnKembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Order ID");
-
-        LblOrderId.setText("1");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Detail Order");
 
         jLabel3.setText("Nomor Meja");
 
-        LblNomorMeja.setText("1");
-
         jLabel4.setText("Item");
+
+        txtTotalPembayaran.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        txtTotalPembayaran.setText("0");
+
+        tabelKeranjang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Item ID", "Jenis", "Nama", "Jumlah Item", "Total"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelKeranjang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelKeranjangMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tabelKeranjang);
+
+        jLabel8.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        jLabel8.setText("Total Pembayaran");
+
+        jLabel9.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        jLabel9.setText("Uang Yang Diberikan");
+
+        TxtUangYangDiberikan.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        TxtUangYangDiberikan.setText("0");
+
+        jLabel10.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        jLabel10.setText("Uang Kembalian");
+
+        txtKembalian.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        txtKembalian.setText("0");
+
+        txtOrderId.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        txtOrderId.setText("0");
+
+        txtNoMeja.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        txtNoMeja.setText("0");
+
+        lblNamaBankOCash.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        lblNamaBankOCash.setText("..");
+
+        jLabel5.setText("Jenis Pembayaran");
+
+        txtJenisPembayaran.setFont(new java.awt.Font("Retroica", 0, 13)); // NOI18N
+        txtJenisPembayaran.setText("..");
+
+        jLabel6.setText("Nama Bank / Cash");
+
+        btnKembali.setText("Kembali");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
-                        .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNamaBankOCash, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNoMeja, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtJenisPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtKembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtTotalPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addComponent(TxtUangYangDiberikan, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(28, 28, 28)
-                                    .addComponent(LblNomorMeja, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(LblOrderId, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(195, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnKembali)
+                .addGap(137, 137, 137)
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(LblOrderId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(LblNomorMeja))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(btnKembali))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel1)
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel3)
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel5)
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtTotalPembayaran))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TxtUangYangDiberikan)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(txtKembalian)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtOrderId)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNoMeja)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtJenisPembayaran)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblNamaBankOCash)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tabelKeranjangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelKeranjangMouseClicked
+
+    }//GEN-LAST:event_tabelKeranjangMouseClicked
 
     /**
      * @param args the command line arguments
@@ -130,11 +333,25 @@ public class DetailOrderView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LblNomorMeja;
-    private javax.swing.JLabel LblOrderId;
+    private javax.swing.JLabel TxtUangYangDiberikan;
+    private javax.swing.JButton btnKembali;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblNamaBankOCash;
+    private Model.OrderItem orderItem1;
+    private javax.swing.JTable tabelKeranjang;
+    private javax.swing.JLabel txtJenisPembayaran;
+    private javax.swing.JLabel txtKembalian;
+    private javax.swing.JLabel txtNoMeja;
+    private javax.swing.JLabel txtOrderId;
+    private javax.swing.JLabel txtTotalPembayaran;
     // End of variables declaration//GEN-END:variables
 }

@@ -40,6 +40,6 @@ public class OptionController implements ActionListener{
         } else if(source.equals(view.getbtnProduk())){
             new ItemController();
             view.dispose();
-        }
+        } 
     }
 }

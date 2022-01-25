@@ -5,6 +5,11 @@
  */
 package View;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import javax.swing.JButton;
+import javax.swing.JTable;
+
 /**
  *
  * @author WIBU
@@ -19,6 +24,25 @@ public class ShowAllOrder extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    public JButton getBtnKembali() {
+        return BtnKembali;
+    }
+
+    public JButton getBtnDetail() {
+        return BtnDetail;
+    }
+
+    public JTable getTableAllOrder() {
+        return tblOrder;
+    }
+
+    public void addActionListener(ActionListener e) {
+        BtnKembali.addActionListener(e);
+        BtnDetail.addActionListener(e);
+    }
+    public void addMouseAdapter(MouseAdapter e) {
+        tblOrder.addMouseListener(e);
+    }  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,25 +53,25 @@ public class ShowAllOrder extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblItem = new javax.swing.JTable();
+        tblOrder = new javax.swing.JTable();
         BtnKembali = new javax.swing.JButton();
         BtnDetail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tblItem.setModel(new javax.swing.table.DefaultTableModel(
+        tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Item_ID", "Jenis", "Nama", "Harga"
+                "Item ID", "No Table", "Jenis Pembayaran", "Nama Bank", "Total Pembayaran", "Uang Yang Diberikan", "Uang Kembalian"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -58,12 +82,12 @@ public class ShowAllOrder extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblItem.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblItemMouseClicked(evt);
+                tblOrderMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tblItem);
+        jScrollPane3.setViewportView(tblOrder);
 
         BtnKembali.setText("Kembali");
 
@@ -77,22 +101,25 @@ public class ShowAllOrder extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnKembali)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnKembali)
+                        .addGap(0, 662, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(BtnDetail)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane3)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(337, 337, 337)
+                .addComponent(BtnDetail)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BtnKembali)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(BtnDetail)
                 .addContainerGap())
         );
@@ -100,9 +127,9 @@ public class ShowAllOrder extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblItemMouseClicked
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
 
-    }//GEN-LAST:event_tblItemMouseClicked
+    }//GEN-LAST:event_tblOrderMouseClicked
 
     /**
      * @param args the command line arguments
@@ -143,6 +170,6 @@ public class ShowAllOrder extends javax.swing.JFrame {
     private javax.swing.JButton BtnDetail;
     private javax.swing.JButton BtnKembali;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblItem;
+    private javax.swing.JTable tblOrder;
     // End of variables declaration//GEN-END:variables
 }

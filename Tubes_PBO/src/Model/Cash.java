@@ -13,11 +13,13 @@ public class Cash extends Payment implements Tax {
 
     private double cash;
 
-    public Cash(Double amount, double cash) {
+    public Cash(double amount, double cash) {
         super(amount);
         this.cash = cash;
     }
-
+    public Cash(double amount) {
+        super(amount);
+    }
     public double getCash() {
         return cash;
     }
@@ -29,7 +31,7 @@ public class Cash extends Payment implements Tax {
     @Override
     public double includeTax() {
         double total = 0;
-        total = calculateTotalPrice() + (calculateTotalPrice() * (10 / 100));
+        total = calculateTotalPrice()+(calculateTotalPrice() * 10/100);
         return total;
     }
 

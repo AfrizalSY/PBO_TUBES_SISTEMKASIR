@@ -14,6 +14,7 @@ import Model.Order;
 import View.Order_View;
 import Database.Database;
 import Model.Bank;
+import Model.Cash;
 import Model.Payment;
 import View.Bayar;
 import java.awt.event.ActionEvent;
@@ -83,13 +84,19 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
             view.dispose();
         } else if (source.equals(bayarView.getBtnBayar())) {
             doBayar();
-        } 
+        } else if (source.equals(bayarView.getBtnKembali())) {
+            bayarView.setVisible(false);
+        } else if (source.equals(bayarView.getMthdBank())) {
+            doBank();
+        } else if (source.equals(bayarView.getMthdCash())) {
+            doCash();
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent me) {
         Object source = me.getSource();
-        if (source.equals(view.getTableItem()) && me.getClickCount() == 2) {
+        if (source.equals(view.getTableItem()) && me.getClickCount() == 1) {
             try {
                 JTable target = (JTable) me.getSource();
                 int row = target.getSelectedRow();
@@ -122,11 +129,10 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
             } catch (SQLException ex) {
                 msg.showMessage("Gagal mendapatkan data: " + ex.getMessage(), "Database error", 2);
             }
-        } else if (source.equals(view.getTableKeranjang()) && me.getClickCount() == 2) {
+        } else if (source.equals(view.getTableKeranjang()) && me.getClickCount() == 1) {
             JTable target = (JTable) me.getSource();
             this.selectedItem = target.getSelectedRow();
             if (this.selectedItem != -1) {
-                System.out.println("change");
                 view.getBtnHapus().setEnabled(true);
             }
         }
@@ -200,24 +206,29 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
             if (txtNoMeja.isEmpty() || txtKuantitas.isEmpty()) {
                 msg.showMessage("No Meja dan Jumlah Kuantitas Tidak Boleh Kosong", "Validasi error", 2);
             } else {
-                int itemId = Integer.parseInt(view.getItemId().getText());
-                String nama_item = view.getLblItem().getText();
-                String jenis_item = view.getLblJenis().getText();
-                int noMeja = Integer.parseInt(txtNoMeja);
-                int kuantitas = Integer.parseInt(txtKuantitas);
-                double harga_per_item = Double.parseDouble(view.getLblHarga().getText());
-                harga_per_item *= kuantitas;
-                DefaultTableModel tbl = (DefaultTableModel) view.getTableKeranjang().getModel();
-                if (tbl.getRowCount() == 0) {
-                    this.idOrder = this.cashier.createOrder(noMeja);
+                if (isNumber(txtNoMeja) || isNumber(txtKuantitas)) {
+                    int itemId = Integer.parseInt(view.getItemId().getText());
+                    // String nama_item = view.getLblItem().getText();
+                    // String jenis_item = view.getLblJenis().getText();
+                    int noMeja = Integer.parseInt(txtNoMeja);
+                    int kuantitas = Integer.parseInt(txtKuantitas);
+                    double harga_per_item = Double.parseDouble(view.getLblHarga().getText());
+                    harga_per_item *= kuantitas;
+                    DefaultTableModel tbl = (DefaultTableModel) view.getTableKeranjang().getModel();
+                    if (tbl.getRowCount() == 0) {
+                        this.idOrder = this.cashier.createOrder(noMeja);
+                    }
+                    // insert to keranjang dengan id order IdOrder & item id = selected item
+                    db.connectDB();
+                    String sql = "Insert INTO keranjang (keranjang_id, order_id,id_item,jumlah_item,harga_item_perjumlah)"
+                            + " VALUES(NULL," + this.idOrder + "," + itemId + "," + kuantitas + "," + harga_per_item + ");";
+                    //                System.out.println(sql);
+                    db.executeUpdate(sql);
+                    view.getBtnBayar().setEnabled(true);
+                    view.ResetLabel();
+                } else {
+                    msg.showMessage("No Meja atau Kuantitas Harus Angka", "Validasi error", 2);
                 }
-                // insert to keranjang dengan id order IdOrder & item id = selected item
-                db.connectDB();
-                String sql = "Insert INTO keranjang (keranjang_id, order_id,id_item,jumlah_item,harga_item_perjumlah)"
-                        + " VALUES(NULL," + this.idOrder + "," + itemId + "," + kuantitas + "," + harga_per_item + ");";
-                System.out.println(sql);
-                db.executeUpdate(sql);
-                view.getBtnBayar().setEnabled(true);
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
@@ -226,8 +237,13 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
 
     public void doDelete() {
         try {
-            int idItem = this.items.get(selectedItem).getItemId();
-            this.cashier.deleteItem(idItem, this.idOrder);
+            DefaultTableModel tbl = (DefaultTableModel) view.getTableKeranjang().getModel();
+            if (tbl.getRowCount() <= 1) {
+                msg.showMessage("Pesanan tidak boleh kosong", "Validasi error", 2);
+            } else {
+                int idItem = this.items.get(selectedItem).getItemId();
+                this.cashier.deleteItem(idItem, this.idOrder);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -235,30 +251,69 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
     }
 
     public void showBayar() {
-        Bank bank = new Bank(this.total);
-        bayarView.getMthdBank().setSelected(true);
-        bayarView.getTotal().setText(String.valueOf(bank.getAmount()));
-        bayarView.getLblTotalWTax().setText(String.valueOf(bank.includeTax()));
+//        bayarView.getCmbNamaBank().setEnabled(false);
+//        bayarView.getMthdBank().setSelected(true);
+//        bayarView.getTotal().setText(String.valueOf(bank.getAmount()));
+//        bayarView.getLblTotalWTax().setText(String.valueOf(bank.includeTax()));
         bayarView.getTotal().setText(String.valueOf(this.total));
-
+        bayarView.getCmbNamaBank().setEnabled(false);
         bayarView.setVisible(true);
+    }
+
+    public void doBank() {
+        Bank bank = new Bank(this.total);
+        bayarView.getLblTotalWTax().setText(String.valueOf(bank.includeTax()));
+        bayarView.getCmbNamaBank().setEnabled(true);
+    }
+
+    public void doCash() {
+        Cash cash = new Cash(this.total);
+        bayarView.getLblTotalWTax().setText(String.valueOf(cash.includeTax()));
+        bayarView.getCmbNamaBank().setEnabled(false);
     }
 
     public void doBayar() {
         try {
-            Double totalPrice = Double.parseDouble(this.bayarView.getLblTotalWTax().getText());
+            if (bayarView.getTxtFieldBayar().getText().isEmpty()) {
+                msg.showMessage("Pembayaraan Harus Disisi", "Validasi error", 2);
+            } else {
+                if (isNumber(bayarView.getTxtFieldBayar().getText())) {
+                    Double totalPrice = Double.parseDouble(this.bayarView.getLblTotalWTax().getText());
 
-            Double cash = Double.parseDouble(this.bayarView.getTxtFieldBayar().getText());
-            Double kembalian = Double.parseDouble(this.bayarView.getKembalian().getText());
-            if (bayarView.getMthdCash().isSelected()) {
+                    Double cash = Double.parseDouble(this.bayarView.getTxtFieldBayar().getText());
+                    Double kembalian = Double.parseDouble(this.bayarView.getKembalian().getText());
+                    if (kembalian < 0) {
+                        msg.showMessage("Kembalian Tidak Boleh Minus", "Validasi error", 2);
+                    } else {
+                        if (bayarView.getMthdCash().isSelected()) {
 
-                this.cashier.payWithCash(totalPrice, cash, kembalian, this.idOrder);
-            } else {                
-                String bankName = this.bayarView.getCmbNamaBank().getSelectedItem().toString();
-                this.cashier.payWithBank(totalPrice, bankName, cash, kembalian, this.idOrder);
+                            this.cashier.payWithCash(totalPrice, cash, kembalian, this.idOrder);
+                            msg.showMessage("Pembayaran berhasil", "Success", 1);
+                        } else {
+                            String bankName = this.bayarView.getCmbNamaBank().getSelectedItem().toString();
+                            this.cashier.payWithBank(totalPrice, bankName, cash, kembalian, this.idOrder);
+                            msg.showMessage("Pembayaran berhasil", "Success", 1);
+                        }
+                    }
+                    view.dispose();
+                    bayarView.dispose();
+                    new OrderController();
+                } else {
+                    msg.showMessage("Pembayaran Tidak Boleh Huruf", "Validasi error", 2);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public boolean isNumber(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isDigit(s.charAt(i)) == false) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

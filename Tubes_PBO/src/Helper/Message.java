@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class Message {
 
     public Message() {
-        
+
     }
 
     public void showMessage(String message, String title, int type) {
@@ -23,7 +23,7 @@ public class Message {
         // 2 warning
         JOptionPane.showMessageDialog(null, message, title, type);
         // jika error maka program akan berhenti
-        if(type == 0){
+        if (type == 0) {
             System.exit(0);
         }
     }
