@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2022 at 08:54 AM
+-- Generation Time: Jan 26, 2022 at 04:31 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -41,9 +41,12 @@ CREATE TABLE `item` (
 
 INSERT INTO `item` (`item_id`, `item_name`, `item_price`, `item_jenis`, `volume_or_weight`) VALUES
 (1, 'Nasi Goreng', 15000, 'Makanan', 140),
-(2, 'Es Teh', 3000, 'Minuman', 500),
-(3, 'Mie Goreng', 13000, 'Makanan', 150),
-(4, 'Es Jeruk', 4000, 'Minuman', 400);
+(2, 'Es Teh', 3000, 'Minuman', 200),
+(3, 'Jus Jeruk', 8000, 'Minuman', 120),
+(4, 'Cheeseburger', 25000, 'Makanan', 150),
+(5, 'Pizza', 70000, 'Makanan', 200),
+(6, 'Lemon Tea', 10000, 'Minuman', 200),
+(7, 'Lasagna', 35000, 'Makanan', 230);
 
 -- --------------------------------------------------------
 
@@ -85,12 +88,14 @@ CREATE TABLE `keranjang` (
 --
 
 INSERT INTO `keranjang` (`keranjang_id`, `order_id`, `id_item`, `jumlah_item`, `harga_item_perjumlah`) VALUES
-(1, 1, 1, 1, 15000),
+(1, 1, 1, 2, 30000),
 (2, 1, 2, 2, 6000),
-(3, 1, 3, 1, 13000),
-(4, 2, 3, 2, 26000),
-(5, 2, 4, 3, 12000),
-(6, 2, 1, 1, 15000);
+(3, 2, 4, 1, 25000),
+(4, 2, 6, 1, 10000),
+(5, 3, 7, 1, 35000),
+(6, 3, 5, 1, 70000),
+(7, 3, 6, 1, 10000),
+(8, 3, 3, 1, 8000);
 
 -- --------------------------------------------------------
 
@@ -113,8 +118,9 @@ CREATE TABLE `order_table` (
 --
 
 INSERT INTO `order_table` (`id_order`, `no_table`, `jenis_pembayaran`, `nama_bank`, `total_pembayaran`, `uang_yang_diberikan`, `uang_kembalian`) VALUES
-(1, 12, 'cash', '-', 37400, 50000, 12600),
-(2, 12, 'bank', 'Mandiri', 58300, 100000, 41700);
+(1, 21, 'cash', '-', 39600, 50000, 10400),
+(2, 24, 'bank', 'BNI', 38500, 40000, 1500),
+(3, 5, 'bank', 'Mandiri', 135300, 150000, 14700);
 
 --
 -- Indexes for dumped tables
@@ -153,7 +159,7 @@ ALTER TABLE `order_table`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kasir`
@@ -165,13 +171,13 @@ ALTER TABLE `kasir`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `keranjang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `keranjang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
