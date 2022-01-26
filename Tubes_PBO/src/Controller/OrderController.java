@@ -94,7 +94,7 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
     }
 
     @Override
-    public void mousePressed(MouseEvent me) {
+    public void mouseClicked(MouseEvent me) {
         Object source = me.getSource();
         if (source.equals(view.getTableItem()) && me.getClickCount() == 1) {
             try {
@@ -208,8 +208,6 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
             } else {
                 if (isNumber(txtNoMeja) || isNumber(txtKuantitas)) {
                     int itemId = Integer.parseInt(view.getItemId().getText());
-                    // String nama_item = view.getLblItem().getText();
-                    // String jenis_item = view.getLblJenis().getText();
                     int noMeja = Integer.parseInt(txtNoMeja);
                     int kuantitas = Integer.parseInt(txtKuantitas);
                     double harga_per_item = Double.parseDouble(view.getLblHarga().getText());
@@ -226,6 +224,8 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
                     db.executeUpdate(sql);
                     view.getBtnBayar().setEnabled(true);
                     view.ResetLabel();
+                    view.getBtnTambahOrder().setEnabled(false);
+                    view.getTxtFieldNoMeja().setEnabled(false);
                 } else {
                     msg.showMessage("No Meja atau Kuantitas Harus Angka", "Validasi error", 2);
                 }
@@ -251,10 +251,6 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
     }
 
     public void showBayar() {
-//        bayarView.getCmbNamaBank().setEnabled(false);
-//        bayarView.getMthdBank().setSelected(true);
-//        bayarView.getTotal().setText(String.valueOf(bank.getAmount()));
-//        bayarView.getLblTotalWTax().setText(String.valueOf(bank.includeTax()));
         bayarView.getTotal().setText(String.valueOf(this.total));
         bayarView.getCmbNamaBank().setEnabled(false);
         bayarView.setVisible(true);
@@ -275,7 +271,7 @@ public class OrderController extends MouseAdapter implements ActionListener, Bas
     public void doBayar() {
         try {
             if (bayarView.getTxtFieldBayar().getText().isEmpty()) {
-                msg.showMessage("Pembayaraan Harus Disisi", "Validasi error", 2);
+                msg.showMessage("Pembayaraan Harus Diisi", "Validasi error", 2);
             } else {
                 if (isNumber(bayarView.getTxtFieldBayar().getText())) {
                     Double totalPrice = Double.parseDouble(this.bayarView.getLblTotalWTax().getText());

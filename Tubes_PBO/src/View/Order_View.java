@@ -268,7 +268,7 @@ public class Order_View extends javax.swing.JFrame {
         txttotal.setFont(new java.awt.Font("Retroica", 0, 18)); // NOI18N
         txttotal.setText("0");
 
-        btnhapus.setBackground(new java.awt.Color(0, 0, 255));
+        btnhapus.setBackground(new java.awt.Color(255, 0, 0));
         btnhapus.setText("Hapus");
         btnhapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,7 +276,7 @@ public class Order_View extends javax.swing.JFrame {
             }
         });
 
-        btnbayar.setBackground(new java.awt.Color(255, 0, 0));
+        btnbayar.setBackground(new java.awt.Color(0, 255, 0));
         btnbayar.setText("Bayar");
         btnbayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

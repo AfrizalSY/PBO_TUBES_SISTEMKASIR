@@ -61,7 +61,7 @@ public class ItemController extends MouseAdapter implements ActionListener, Base
     }
 
     @Override
-    public void mousePressed(MouseEvent me) {
+    public void mouseClicked(MouseEvent me) {
         Object source = me.getSource();
         if(source.equals(view.getTableProduk())&& me.getClickCount()==1){
             try{

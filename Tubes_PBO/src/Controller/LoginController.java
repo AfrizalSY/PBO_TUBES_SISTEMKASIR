@@ -7,6 +7,7 @@ package Controller;
 
 import View.Login;
 import Database.Database;
+import Model.Cashier;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -22,7 +23,7 @@ public class LoginController extends MouseAdapter implements ActionListener, Bas
 
     private Login view;
     private Database db;
-
+    private Cashier cashier = new Cashier();
     public LoginController() {
         this.view = new Login();
         this.db = new Database();

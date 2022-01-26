@@ -117,7 +117,7 @@ public class Order {
         }
         return total;
     }
-    
+    // Melakukann Update Total Price di OrderItem
     public void updateTotalPrice(int idOrder, double price) throws SQLException{
         db.connectDB();
         String sql = "UPDATE order_table SET total_pembayaran = '%s' WHERE id_order = %d";

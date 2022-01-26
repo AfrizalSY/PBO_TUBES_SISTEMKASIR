@@ -78,7 +78,9 @@ public class OrderItem {
 
     public void setItem(Item item) {
         this.item = item;
-    }   
+    } 
+    
+    // Querry untuk mengambil semua item order yang ada berdasarkan order id yang dimasukan
     public ArrayList<OrderItem> getAllOrderItem(int id) throws SQLException{
         db.connectDB();
         ArrayList<OrderItem> data = new ArrayList<>();

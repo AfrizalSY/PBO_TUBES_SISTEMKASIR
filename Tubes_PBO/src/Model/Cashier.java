@@ -60,7 +60,8 @@ public class Cashier implements CashierInterface {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+    // Querry untuk mengambil semua item pada database di table item
     public ArrayList<Item> getAllItem() throws SQLException {
         db.connectDB();
         ArrayList<Item> data = new ArrayList<>();
@@ -81,7 +82,7 @@ public class Cashier implements CashierInterface {
         db.disconnectDB();
         return data;
     }
-
+    // Melakukan pembuatan Orderan dengan melakukan insert id dan no_table ditable order dalam database
     public int createOrder(int tableNo) throws SQLException {
         db.connectDB();
         String sql = "INSERT INTO `order_table` (`no_table`) VALUES ('%s');";
@@ -90,7 +91,8 @@ public class Cashier implements CashierInterface {
         db.disconnectDB();
         return newOrderId;
     }
-
+    
+    //Melakukan Insert item baru untuk menambahkan item berjenis makanan
     @Override
     public void addItem(Food f) throws SQLException {
         db.connectDB();
@@ -100,18 +102,17 @@ public class Cashier implements CashierInterface {
         db.disconnectDB();
     }
 
+    //Melakukan Insert item baru untuk menambahkan item berjenis Minuman
     @Override
     public void addItem(Beverage Bf) throws SQLException {
         db.connectDB();
         String sql = "INSERT INTO item (item_id,item_name,item_price,item_jenis,volume_or_weight) "
                 + "VALUES(NULL,'" + Bf.getName() + "', " + Bf.getPrice() + ", '" + Bf.getJenis() + "', " + Bf.getVolume() + ");";
-        // sql = String.format(sql,Bf.getName(),Bf.getPrice(),Bf.getJenis(),Bf.getVolume());
         db.execute(sql);
         db.disconnectDB();
     }
 
-
-
+    //Melakukan Edit item  untuk melakukan update item berjenis makanan sesuai dengan yang dipilih
     @Override
     public void editItem(Food f) throws SQLException {
         db.connectDB();
@@ -120,7 +121,8 @@ public class Cashier implements CashierInterface {
         db.executeUpdate(sql);
         db.disconnectDB();
     }
-
+    
+    //Melakukan Edit item  untuk melakukan update item berjenis minuman sesuai dengan yang dipilih
     @Override
     public void editItem(Beverage Bf) throws SQLException {
         db.connectDB();
@@ -129,10 +131,8 @@ public class Cashier implements CashierInterface {
         db.executeUpdate(sql);
         db.disconnectDB();
     }
-    // @Override
-    // public void editItem(Item n, Order o) {
-
-    // }
+    
+    // Melakukan delete item berdasarkan id dalam table item
     @Override
     public void deleteItem(int idx) throws SQLException {
         db.connectDB();
@@ -140,7 +140,8 @@ public class Cashier implements CashierInterface {
         db.executeUpdate(sql);
         db.disconnectDB();
     }
-
+    
+    // Melakukan delete item dikeranjang sesuai dengan id_item dan order_id
     @Override
     public void deleteItem(int itemId, int orderId) throws SQLException {
         db.connectDB();
@@ -150,6 +151,7 @@ public class Cashier implements CashierInterface {
         db.disconnectDB();
     }
 
+    // Querry untuk mengambil semua order pada database di table order_table
     public ArrayList<Order> showAllOrder() throws SQLException {
         db.connectDB();
         listOrder = new ArrayList<>();
@@ -168,7 +170,7 @@ public class Cashier implements CashierInterface {
         db.disconnectDB();
         return listOrder;
     }
-
+    // Melakukan Update terhadap orderan yang membasukan jenis pembayaran,total pembayaran, uang yang diberikan dan uang kembalian jika membayar menggunakan cash
     public void payWithCash(double totalPrice, double cash, double kembalian, int orderId) throws SQLException {
         db.connectDB();
         String sql = "UPDATE order_table SET  jenis_pembayaran='cash', total_pembayaran='%s', nama_bank = '-',uang_yang_diberikan = '%s', uang_kembalian = '%s' WHERE id_order = %d";
@@ -176,7 +178,7 @@ public class Cashier implements CashierInterface {
         db.executeUpdate(sql);
         db.disconnectDB();
     }
-
+    // Melakukan Update terhadap orderan yang membasukan jenis pembayaran,total pembayaran, uang yang diberikan dan uang kembalian jika membayar menggunakan bank
     public void payWithBank(double totalPrice, String bankName, double cash, double kembalian, int orderId) throws SQLException {
         db.connectDB();
         String sql = "UPDATE order_table SET jenis_pembayaran='bank', total_pembayaran='%s', nama_bank = '%s', uang_yang_diberikan = '%s', uang_kembalian = '%s' WHERE id_order = %d";

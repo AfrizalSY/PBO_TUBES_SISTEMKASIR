@@ -48,7 +48,7 @@ public class ShowAllOrderController extends MouseAdapter implements ActionListen
         }
     }
     @Override
-    public void mousePressed(MouseEvent me) {
+    public void mouseClicked(MouseEvent me) {
         Object source = me.getSource();
         if (source.equals(view.getTableAllOrder()) && me.getClickCount() == 1) {
             JTable target = (JTable) me.getSource();

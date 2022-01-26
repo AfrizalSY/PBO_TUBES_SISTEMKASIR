@@ -12,5 +12,4 @@ import Model.Cashier;
  */
 public interface BaseController {
     Message msg = new Message();
-    Cashier cashier = new Cashier();
 }
